@@ -21,6 +21,12 @@ from django.contrib.auth import authenticate, login
 
 import hashlib
 
+
+
+# TODO: remove form on tamplate login, use only bootstrap
+# TODO: TESTE LOGIN AND REGISTER FEATURES
+
+
 '''
 ----------------------------------------------------------
                    CAE USER PROJECTS
@@ -219,7 +225,7 @@ def cae_register2(request):
 
             print(data_to_send_email)
 
-            # lib_r.cae_send_email(data_to_send_email)
+            lib_r.cae_send_email(data_to_send_email)
             # return redirect(url_for('login'))
 
         if not form.validate_on_submit():

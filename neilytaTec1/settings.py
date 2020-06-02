@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/2.2/ref/settings/
 """
 
 import os
-# from neilytaTec1.email_config import *
+from neilytaTec1.email_config import *
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -136,7 +136,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # ------------- SETTING EMIAL INFO -----------------
 #
 # True
-'''
 EMAIL_HOST = EMAIL_HOST
 EMAIL_PORT = EMAIL_PORT
 EMAIL_HOST_USER = EMAIL_HOST_USER
@@ -146,4 +145,3 @@ EMAIL_HOST_PASSWORD = EMAIL_HOST_PASSWORD
 EMAIL_USE_TLS = EMAIL_USE_TLS   # for gmail, google apps
 
 EMAIL_USE_SSL = EMAIL_USE_SSL   # False
-'''

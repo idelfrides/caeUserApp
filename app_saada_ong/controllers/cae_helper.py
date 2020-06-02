@@ -41,3 +41,8 @@ def new_clean_string(input_str=None, change_encode=False):
 
     '''
     return clean_backslash(clean_str)
+
+
+
+
+# TODO: CREATE A CLEAN_EMAIL METHOD
