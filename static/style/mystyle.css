@@ -1,0 +1,46 @@
+div#btn-add{
+    position: relative;
+    float: right;
+    margin: 20px auto;
+}
+
+a#active_doing{
+    background-color: LightGray;
+    color: #ffffff;
+}
+
+a#active_done{
+    background-color: LightGray;
+    color: #ffffff;
+}
+
+div#main-content{
+    position: relative;
+    margin-left: 60%;
+}
+
+#cae_color{
+    position: relative;
+    padding: 130px 0;
+    background-color: rgba(239, 186, 129, 1);
+    /* margin-bottom: -15.5%;*/
+    margin-bottom: -9.5%;
+    z-index: 1;
+}
+
+#login_borger{
+    border-right: 3px solid rgba(239, 186, 129, 1);
+}
+
+#login_style{
+    position: relative;
+    margin-top: 15%;
+    background-color: #ffffff;
+    z-index: 2;
+}
+
+#set_zindex{
+    position: relative;
+    background-color: #ffffff;
+    z-index: 2;
+}

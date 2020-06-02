@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Saada ONG | {{ title }}</title>
+    <meta name="description" content=" MINICURSO DHANGO 2.2.1 | JUN/2019">
+    <meta name="keywords" content="DJANGO, PYTHON, HTML,CSS">
+    <meta name="author" content="IDELFRIDES JORGE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="shortcut icon" type="image/x-icon" href="../../../media/images/favicon-wm-32.ico">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../../static/style/app_css.css">
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+    <script src="../../../static/js_files/app_js.js" type="text/javascript" language="javascript"></script>
+
+    <style>
+        .carousel-inner{
+            width:100%;
+            height:500px;
+        }
+    </style>
+</head>
+<body class="w-100 m-0 p-0" style="background-color:#E9ECEF;">
+    <div class="w-100 mt-0">
+        <!-- menu -->
+        <div class="nav w-100 bg-dark nav-fixed">
+            <!-- IMAGE LOGO-->
+            <div class="mx-auto mt-5">
+                <a href="{% url 'url_home' %}">
+                    <img src="../../media/images/BRASAO_Brazil.png"
+                        width="120"
+                        height="120"
+                        title="Saada ONG - <Slogan enter here>">
+                </a>
+            </div>
+
+            <!-- NAV BAR-->
+            <div class="w-100 mx-auto my-4 vav-fixed">
+                <ul class="nav nav-tabs text-uppercase justify-content-center w-100">
+                    <li class="nav-item  my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white"  href="{% url 'url_home' %}" title="Home">
+                            saada
+                        </a>
+                    </li>
+
+                    <li class="dropdown nav-item bg-none my-4 mx-2 teste-estilo">
+                        <p class="nav-link text-white  dropdown-toggle active_menu" data-toggle="dropdown">
+                            projetos
+                        </p>
+
+                        {% for p in projects %}
+                            <div class="dropdown-menu text-capitalize">
+                                {% if p.id == chosen_id_project %}
+                                    <a class="dropdown-item active" href="{% url 'go2thisproject' p.id %}">{{ p.nome_projeto }}</a>
+                                {% elif  p.id != chosen_id_project %}
+                                    <a class="dropdown-item" href="{% url 'go2thisproject' p.id %}">{{ p.nome_projeto }}</a>
+                                {% endif %}
+                            </div>
+                        {% endfor %}
+
+                    </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="{% url 'go2allnews' %}" title="Realizadores do Evento">
+                            notícias
+                        </a>
+                    </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white"  href="#" title="Cursos Técnicos">
+                            quem somos
+                        </a>
+                    </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="#" title="Alunos de alto performance">
+                            apoie este projeto
+                        </a>
+                    </li>
+
+                    <li class="nav-item  my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="{% url 'url_listagem' %}" title="Listagem de todas cateorias">
+                            curiosidades
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ************ PROJETO ************** -->
+        <div class="container-fluid w-100 py-5 saada_background">
+            <section id="evento" class="container border border-dark w-100 pb-5 pt-1 project_bg">
+                {% for proj in projects %}
+                {% if proj.id == chosen_id_project %}
+                <header class="row col" >
+                    <h1 class="col-12 col-sm-12 text-white font-weight-bold text-uppercase text-center" style="font-size: 2em;">
+                        apresentação de projeto
+                        <div class="mt-3 py-1 mx-auto" style="background-color:#00008B; width: 20%;"></div>
+                    </h1>
+                </header> <br><br><br>
+
+                <div class="row">
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6">
+                        <header class="text-white text-center rounded border border-white pb-2 mb-2 ">
+                            <h3 class=" font-weight-bold display-5 pt-3">{{ proj.nome_projeto }}</h3>
+                            <p class="text-capitalize"> {{ proj.slogan_projeto }}</p>
+                        </header>
+                        <figure class="bg-light rounded">
+                            <!-- <img src="{{d.userprofile.image.url}}" width="100"> -->
+                            <!-- <img src="{{d.cover.image.url}}" width="100">-->
+                            <img class="row col-12 mx-auto mx-sm-auto mx-md-auto"
+                                src="../../media/{{proj.logotipo_projeto}}"
+                                class="rounded"
+                                style="max-width:400px;">
+                        </figure>
+                    </div>
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-justify mx-sm-0">
+                        <p class=" p-4 text-white border border-white rounded">{{ proj.descricao }}</p>
+                    </div>
+
+                    <div class="col-12 col-sm-12 col-md-12 col-lg-6 col-xl-6 text-justify mx-sm-0">
+                        <p class=" p-2 text-white border border-white rounded"><strong>Criação: &nbsp;&nbsp;</strong> {{ proj.data_hora_criação }}</p>
+                        <p class=" p-2 text-white border border-white rounded"><strong>Última Atualização: &nbsp;&nbsp;</strong> {{ proj.atualizar }}</p>
+                    </div>
+                </div>
+                {% endif %}
+                {% endfor %}
+            </section>
+        </div>
+
+        <!-- SCROLL TOP -->
+        <!--
+        <a class="scrollToTop" href="#"> TOP
+            <i class="fas fa-arrow-circle-up" style="font-size:48px; color: red;"></i>
+        </a>
+
+            <span class="glyphicon glyphicon-menu-up teste"
+                    style="font-size:25pt;"
+                    aria-hidden="true">Top
+            </span>
+
+        -->
+
+        <div class="box hide">
+            <a href="" id="js-top">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6">
+                    <path d="M12 6H0l6-6z"/>
+                </svg>
+            </a>
+        </div>
+
+        <!-- footer -->
+        <div class="py-2" style="background-color:#ffa500;"></div>
+        <section class="text-white text-weight-bold text-left">
+            <!-- FOOTER CONTENT -->
+            <div class="row col py-5 saada_bg_footer text-white" style="font-size:13pt;">
+
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-2 ml-xl-5 mr-xl-5 border">
+                    <h5>HOME</h5>
+                    <ul class="nav flex-column text-capitalize">
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="{% url 'url_home' %}" title="Home Saada">
+                                saada
+                            </a>
+                        </li>
+
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="#" title="Projetos">
+                                projetos
+                            </a>
+                        </li>
+
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="#" title="Notícias">
+                                notícias
+                            </a>
+                        </li>
+
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white"  href="#" title="Sobre">
+                                quem somos
+                            </a>
+                        </li>
+
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="#" title="Apoie este projeto">
+                                apoie o projeto
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- LEGAL MENU -->
+                <div class="col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 mx-xl-5 border">
+                    <h5>LEGAL</h5><br>
+                    <ul class="nav flex-column text-capitalize">
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="{% url 'url_home' %}" title="Home Saada">
+                                direitos autorias
+                            </a>
+                        </li>
+
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="#" title="Projetos">
+                                termos de userprofile
+                            </a>
+                        </li>
+
+                        <li class="nav-item footeer_estilo">
+                            <a class="nav-link text-white" href="#" title="Notícias">
+                                política de serviço
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+                <!-- SOCIAL MIDEA MENU -->
+                <div class='col-12 col-sm-12 col-md-4 col-lg-4 col-xl-3 ml-xl-5 border'>
+                    <h5 class="text-white mb-4">SIGA-NOS</h5>
+                    <ul class="nav">
+                        <li class="nav-item">
+                          <a class="nav-link social" href="#" title="Visite o nosso INSTAGRAM"><img src="../../../media/images/ig-logo-email.png" class="m-0 p-0 social"></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class=" nav-link social" href="#" title="Visite o nosso FACEBOOK"><img src="../../../media/images/facebook-2.png" class="m-0 p-0 social"></a>
+                        </li>
+                        <li class="nav-item">
+                          <a class="nav-link social" href="#" title="Visite o nosso LINKEDIN"><img src="../../../media/images/ig-logo-email.png" class="m-0 p-0 social"></a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>  <!-- END FOOTER CONTENT -->
+
+
+            <div class="topwm">
+                <a class="top-link" href="" id="js-top">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 12 6">
+                        <path d="M12 6H0l6-6z"/>
+                    </svg>
+                    <span class="screen-reader-text">Back to top</span>
+                </a>
+            </div>
+
+            <footer class="bg-dark2 text-center py-3">
+                <p>Copyright &copy; 2020 | Saada ONG - Todos os direitos reservados <br>
+                    <strong> By  Eng. Idelfrides Jorge.</strong>
+                </p>
+            </footer>
+        </section>
+    </div>
+
+</body>
+</html>

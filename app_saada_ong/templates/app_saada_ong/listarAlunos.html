@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+
+    <title>Listagem de Alunos</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="DJANGO, PYTHON, HTML,CSS">
+    <meta name="author" content="IDELFRIDES JORGE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 style="text-transform: uppercase; text-align: center">Listagem de Alunos</h1><br>
+        <p class="text-center display-5">{{ info }}</p>
+    </div>
+
+    <section class="containner-fluid">
+        <div class="table-responsive container">
+            <table class="table table-striped border">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Ordem</th>
+                        <th>Nome</th>
+                        <th>Curso</th>
+                        <th>Ano Curso</th>
+                        <th>Gênero</th>
+                        <th>Idade</th>
+                        <th>Destaque</th>
+                        <th>Atualizar</th>
+                        <th>Remover</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for alu in alunos %}
+                    <tr class="text-uppercase">
+                        <td>{{ alu.id }}</td>
+                        <td >{{ alu.nome_aluno }}</td>
+                        <td>{{ alu.curso }}</td>
+                        <td>{{ alu.ano }}</td>
+                        <td>{{ alu.genero }}</td>
+                        <td>{{ alu.idade }}</td>
+                        <td>{{ alu.eh_destaque }}</td>
+                        <td>
+                            <a href="{% url 'url_update' 2 alu.id %}"><button type="button" class="btn btn-primary">Atualizar</button></a>
+                        </td>
+                        <td>
+                            <a href="{% url 'url_remove' 2 alu.id %}"><button type="button" class="btn btn-danger">Remover</button></a>
+                        </td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </section>
+
+    <br>
+    <hr>
+    <br>
+
+    <div class="row w-50 mx-auto">
+
+         <a href="{% url 'go2create' 2 %}" class="ml-auto mr-0 col-6">
+           <button type="button" class="btn btn-info text-dark w-100">Cadastar</button>
+        </a>
+
+        <a href="{% url 'url_listagem' %}" class="mr-auto ml-0 col-6">
+           <button type="button" class="btn btn-outline-warning text-dark w-100">Voltar</button>
+        </a>
+
+    </div>
+
+    <br><br><br>
+
+    <div class="py-2" style="background-color:#643885;"></div>
+    <section class="text-white text-weight-bold text-center">
+        <div class="py-3" style="color:#643885; font-size:13pt;">
+            <a href="{% url 'url_home' %}"><img src="../media/images/Logo-Ev-EEEP.png" width="150" class="m-0 p-0"></a>
+            <p><strong> I NEILYTA TEC </strong> - Semana tecnologica da escola pofissionalizante de Massapê.</p>
+            <p>Cursos Técnicos: Informática | Agropecuária | Electromecânica | Finanças</p>
+            <p>Evento: De 04 a 07 de junho de 2019.</p>
+        </div>
+        <footer class="bg-secondary py-3">
+            <p>Copyright &copy; 2019 | I Neilyta Tec - Todos os direitos reservados <br><strong> By Idelfrides Jorge.</strong></p>
+        </footer>
+    </section>
+
+</body>
+</html>

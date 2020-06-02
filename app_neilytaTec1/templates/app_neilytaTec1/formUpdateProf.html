@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="pt-bt">
+<head>
+
+    <title>Atualização de Professores</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Free Web tutorials">
+    <meta name="keywords" content="DJANGO, PYTHON, HTML,CSS">
+    <meta name="author" content="IDELFRIDES JORGE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</head>
+<body>
+    <div class="jumbotron jumbotron-fluid">
+        <h1 style="text-transform: uppercase; text-align: center">Atualização de Professores</h1><br>
+        <p class="text-center display-6">{{ info }}</p><p class="text-center text-uppercase font-weight-bold display-4"> {{ update_prof.nome }} </p>
+    </div>
+    <div class="conteiner w-50 mx-auto border border">
+
+        <form method="post" class="w-100 border border ">
+            {% csrf_token %}
+
+            {{ form.as_p }}
+
+            <br><br>
+            <hr>
+            <br>
+
+            <div class="w-100 mx-auto">
+                <button type="submit" class="btn btn-info text-white mr-3 col-6 text-uppercase text-weight-bold">Atualizar</button>
+
+                <a href="{% url 'go2listarprof' %}" class=" ml-4">
+                    <button type="button" class="btn btn-outline-warning col-5 text-uppercase text-weight-bold text-dark">Voltar</button>
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <br><br>
+    <hr>
+    <br><br><br>
+
+     <div class="py-2" style="background-color:#643885;"></div>
+    <section class="text-white text-weight-bold text-center">
+        <div class="py-3" style="color:#643885; font-size:13pt;">
+            <a href="{% url 'url_home' %}"><img src="../../../media/images/Logo-Ev-EEEP.png" width="150" class="m-0 p-0"></a>
+            <p><strong> I NEILYTA TEC </strong> - Semana tecnologica da escola pofissionalizante de Massapê.</p>
+            <p>Cursos Técnicos: Informática | Agropecuária | Electromecânica | Finanças</p>
+            <p>Evento: De 04 a 07 de junho de 2019.</p>
+        </div>
+        <footer class="bg-secondary py-3">
+            <p>Copyright &copy; 2019 | I Neilyta Tec - Todos os direitos reservados <br><strong> By Idelfrides Jorge.</strong></p>
+        </footer>
+    </section>
+
+</body>
+</html>

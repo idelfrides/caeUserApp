@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %}SAADA ONG{% endblock %}</title>
+    <meta name="description" content="Site profissional da SAADA ONG | maio/2020">
+    <meta name="keywords" content="DJANGO, PYTHON, BOOTSTRAP, CSS, JAVASCRIPT">
+    <meta name="author" content="IDELFRIDES JORGE">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link
+        rel="stylesheet"
+        href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
+        crossorigin="anonymous">
+
+    <link rel="stylesheet" href="../../../static/style/app_css.css">
+
+    
+    <style>
+        .carousel-inner{
+            width:100%;
+            height:500px;
+        }
+    </style>
+</head>
+<body class="w-100 m-0 p-0" style="background-color:#E9ECEF;">
+    <div class="w-100 mt-0">
+        <!-- menu -->
+        <div class="nav w-100 bg-dark nav-fixed">
+            <!-- IMAGE LOGO-->
+            <div class="mx-auto mt-5">
+                <a href="{% url 'url_home' %}">
+                    <img src="media/images/1024px-Coat_of_arms_of_Brazil.svg.png"
+                        width="120"
+                        height="120" 
+                        title="Saada ONG - <Slogan enter here>">
+                </a>
+            </div>
+
+            <!-- NAV BAR-->
+            <div class="w-100 mx-auto my-4 vav-fixed">
+                <ul class="nav nav-tabs text-uppercase justify-content-center w-100">
+                    <li class="nav-item  my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white"  href="{% url 'url_home' %}" title="Home">
+                            saada
+                        </a>
+                    </li>
+
+                    <li class="dropdown nav-item bg-none my-4 mx-2 teste-estilo">
+                        <p class="nav-link text-white  dropdown-toggle" data-toggle="dropdown">
+                            projetos
+                        </p> 
+                
+                        <div class="dropdown-menu text-capitalize">
+                            <a class="dropdown-item" href="#">Empodera angola</a>
+                            <a class="dropdown-item" href="#">programa doori</a>
+                            <a class="dropdown-item active" href="#">saada ong</a>
+                        </div>
+                    
+                    </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="#" title="Realizadores do Evento">
+                            notícias
+                        </a>
+                    </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white"  href="#" title="Cursos Técnicos">
+                            quem somos
+                        </a>
+                    </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="#" title="Alunos de alto performance">
+                            apoie este projeto
+                        </a>
+                    </li>
+
+                    <li class="nav-item  my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="{% url 'url_listagem' %}" title="Listagem de todas cateorias">
+                            curiosidades
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+        </div>
+
+        <!-- COME IN CONTENT WILL BE ENTER HERE -->
+
+        {% block content %}
+
+        {% endblock %}
+
+
+        <!-- SCROLL TOP -->
+        
+        <a class="scrollToTop" href="#"> TOP
+            <i class="fas fa-arrow-circle-up" style="font-size:48px; color: red;">
+            </i>
+        </a>
+
+        <div class="box">
+            <span class="glyphicon glyphicon-menu-up" aria-hidden="true"></span>
+        </div>
+        <!-- footer -->
+        <div class="py-3" style="background-color:#643885;"></div>
+        <section class="text-white text-weight-bold text-center">
+            <div class="py-3" style="color:#643885; font-size:13pt;">
+                <a href="{% url 'url_home' %}"><img src="media/images/Logo-Ev-EEEP.png" width="150" class="m-0 p-0"></a>
+                <p><strong> I NEILYTA TEC </strong> - Semana tecnologica da escola pofissionalizante de Massapê.</p>
+                <p>Cursos Técnicos: Informática | Agropecuária | Electromecânica | Finanças</p>
+                <p>Evento: De 04 a 07 de junho de 2019.</p>
+            </div>
+            <footer class="bg-secondary py-3">
+                <p>Copyright &copy; 2019 | I Neilyta Tec - Todos os direitos reservados <br>
+                    <strong> By  Eng. Idelfrides Jorge.</strong>
+                </p>
+            </footer>
+        </section>
+    </div>
+
+
+    <!-- jQuery, Popper JS and javascript -->
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    
+    <script
+        src="../../../static/js_files/app_js.js"
+        type="text/javascript"
+        language="javascript">
+    </script> 
+
+
+    <!-- jQuery, Popper JS and javascript -->
+    <!--
+    <script 
+      src="https://code.jquery.com/jquery-3.4.1.slim.min.js" 
+      integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" 
+      crossorigin="anonymous">
+    </script>
+    <script 
+      src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" 
+      integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" 
+      crossorigin="anonymous">
+    </script>
+
+    <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/custom_functions.js') }}"></script>
+    -->
+
+</body>
+</html>

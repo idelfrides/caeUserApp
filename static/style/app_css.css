@@ -1,0 +1,235 @@
+
+/* -----------------------------------------------------------
+                        SCROLL STYPE
+--------------------------------------------------------------*/
+.active_menu{
+    background-color: rgba(0, 0, 225, 0.4);
+    color:  red;
+}
+
+span{
+    font-size: 88px;
+}
+
+
+.scrollToTop{
+    position: fixed;
+   /* display: none; */
+    right: 5%;
+    bottom: 20px;
+    visibility: hidden;
+}
+
+.box{
+    background-color: orange;
+    border-bottom: 1px solid #fff;
+    border-radius: 50%;
+    position: fixed;
+    right: 30px;
+    bottom: 50px;
+    cursor: pointer;
+    z-index: 5;
+    width: 70px;
+    height: 70px;
+    visibility: visible;
+}
+
+#backtotop{
+    text-decoration: none;
+    text-transform: none;
+    color: #000;
+    padding: 0px;
+    position: relative;
+    margin: auto;
+}
+
+/*  ---------------------  NOT USED ABOVE  ----------------------------- */
+
+.teste-estilo:hover{
+    border-bottom: 1px solid orange;
+}
+
+.saada_carousel_control{
+    height: 100%;
+    background-color: none;
+    padding: 20px;
+}
+
+.saada_carousel_control:hover{
+    height: 100%;
+    background-color: rgba(255, 165, 0, 0.2);
+    width: 0%;
+    padding: 20px;
+    font-weight:bolder;
+}
+
+.saada_background{
+    background-image: url('../../media/images/workplace-1245776_1920.jpg');
+    background-repeat: no-repeat;
+    background-position: 0%;
+    background-attachment: fixed;
+}
+
+.news_saada_background{
+    background-image: url('../../media/images/buildings-5070537_1920.jpg');
+    background-repeat: no-repeat;
+    background-position: 0%;
+    background-attachment: fixed;
+}
+
+.project_bg{
+    background-color: rgba(120, 120, 120, 0.7);
+}
+
+
+.news_bg{
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+/* NEWS */
+.saada_news{
+    display: inline-block;
+    margin: 0;
+    padding-left: none;
+}
+
+
+.news_stype:hover{
+    box-shadow: 0px 13px 13px 0   rgba(255, 255, 255, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-right: 10px;
+    margin-top: 10px;
+    width: 340px;
+}
+/* -------------------------------------------------------
+                        FOOTER STYLE
+---------------------------------------------------------*/
+
+
+.saada_bg_footer{
+    background-color: #00008B;
+    margin: 0;
+}
+
+.footeer_estilo:hover{
+    margin-left: 5px;
+    border-bottom: none; /* 1px solid orange; */
+    font-size:1em;   /* 17px/16 = 1 em */
+    font-weight: bolder;
+}
+
+
+.social{
+    opacity: 0.6;
+    width: 35px;
+    height: 35px;
+    margin-right: 35px;
+}
+
+.social:hover{
+    opacity: 1;
+    padding-bottom: 10px;
+    width: 40px;
+    height: 40px;
+}
+.bg-dark2 {
+    background-color: #000;
+}
+
+/* --------------------------------------------------------
+                SCROLL TOP - not mine:  USED
+-----------------------------------------------------------*/
+
+.top-link {
+    transition: all .25s ease-in-out;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    display: inline-flex;
+    cursor: pointer;
+    align-items: center;
+    justify-content: center;
+    margin: 0 3em 3em 0;
+    border-radius: 50%;
+    padding: .25em;
+    width: 80px;
+    height: 80px;
+    background-color: #F8F8F8;
+}
+
+
+.top-link:hover{
+
+    background-color:orange;
+
+}
+.show {
+    visibility: visible;
+    opacity: 1;
+}
+
+.hide {
+    visibility: hidden;
+    opacity: 0;
+}
+
+svg {
+    fill: #000;
+    width: 24px;
+    height: 12px;
+}
+
+svg:hover {
+   /* background-color: #E8E8E8; */
+    background-color:orange;
+    fill: #00008b;
+}
+
+/* Text meant only for screen readers. */
+.screen-reader-text {
+    position: absolute;
+    clip-path: inset(50%);
+    margin: -1px;
+    border: 0;
+    padding: 0;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    word-wrap: normal !important;
+    clip: rect(1px, 1px, 1px, 1px);
+}
+.screen-reader-text:focus {
+    display: block;
+    top: 5px;
+    left: 5px;
+    z-index: 100000; /* Above WP toolbar */
+    clip-path: none;
+    background-color: #eee;
+    padding: 15px 23px 14px;
+    width: auto;
+    height: auto;
+    text-decoration: none;
+    line-height: normal;
+    color: #444;
+    font-size: 1em;
+    clip: auto !important;
+
+}
+
+
+
+/*
+
+The Bootstrap 4 grid system has five classes:
+
+    .col- (extra small devices - screen width less than 576px)
+    .col-sm- (small devices - screen width equal to or greater than 576px)
+    .col-md- (medium devices - screen width equal to or greater than 768px)
+    .col-lg- (large devices - screen width equal to or greater than 992px)
+    .col-xl- (xlarge devices - screen width equal to or greater than 1200px)
+
+FONT SIZE CONVERSION
+
+ 14px/16 = 0.875em
+
+
+*/
