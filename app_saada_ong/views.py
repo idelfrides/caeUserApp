@@ -10,7 +10,7 @@ from app_saada_ong.models import Noticias
 from app_saada_ong.formsApp import ProfForm
 from app_saada_ong.formsApp import AlunoForm
 from app_saada_ong.formsApp import CursoForm
-from app_saada_ong.formsApp import LoginForm
+from app_saada_ong.formsApp import UserForm
 # from app_saada_ong.formsApp import UserRegisterForm
 
 from app_saada_ong.controllers.cae_helper import new_clean_string
@@ -52,7 +52,7 @@ def cae_login(request):
 
     print('\n\n\n\n ENTREI NO LOGIN \n\n\n')
 
-    form = LoginForm()
+    form = UserForm()
     # form = UserRegiserForm()
 
     if not form.is_valid() or request.method != 'POST':
@@ -101,7 +101,7 @@ def cae_register(request):
 
     print('\n\n\n\n ENTREI NO REGISTER \n\n\n')
 
-    form = LoginForm()
+    form = UserForm()
 
     if not form.is_valid() or request.method != 'POST':
         dadosLogin = {'title': 'Register'}
@@ -119,7 +119,7 @@ def cae_register2(request):
     print("\n\n\n\n ENTREI NO REGISTER 2....\n\n\n\n")
     # obj = Foo.objects.latest('id')
     # u = Foo.objects.latest() --> u.pk
-    form = LoginForm()
+    form = UserForm()
     lib_r = LibRegister()
 
     '''
