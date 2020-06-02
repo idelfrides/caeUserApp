@@ -1,4 +1,4 @@
-# App User registration to CONNECT AFRICA EDUCATION PLATFORM - Django
+# App: User registration to CONNECT AFRICA EDUCATION PLATFORM
 
 
 
