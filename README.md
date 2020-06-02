@@ -2,13 +2,13 @@
 
 
 
-###  The Project
+### The Project
 
 
-This is an app created to AVAILIBLE our tarket people to register to platform.
+This is an app created to AVAILIBLE our tarket people to register to our platform - **CONNECT AFRICA EDUCATION** .
 Python 3.7.x is the python interpreter version used on the project. 
 
-**MORE DESCRRIPTION COMING SOON**
+**MORE DESCRIPTION COMING SOON**
 
       ...
       
