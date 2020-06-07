@@ -23,7 +23,8 @@ import hashlib
 
 
 
-# TODO: TESTE LOGIN AND REGISTER FEATURES
+# TODO: TESTE LOGIN  FEATURE. check_password is makning trouble.
+#   I need to study about it.
 
 
 '''
@@ -38,11 +39,6 @@ def home(request):
     dados_evento['title_secao_ev'] = 'evento'
     dados_evento['evento'] = Evento.objects.all()
     dados_evento['projects'] = Projetos.objects.all()
-
-    '''
-    dadosProjeto = {}
-    dadosProjeto['projects'] = Projetos.objects.all()
-    '''
 
     return render(
         request,
@@ -60,44 +56,49 @@ def cae_login(request):
     form = UserForm()
     # form = UserRegiserForm()
 
-    if not form.is_valid() or request.method != 'POST':
+    if request.method != 'POST':
         dadosLogin = {'title': 'Login'}
         dadosLogin['myform'] = form
-        # import pdb; pdb.set_trace()
+
         return render(
             request,
             'app_saada_ong/loginWithoutForm.html',
             dadosLogin
         )
 
-    if form.is_valid():
+    if  request.method == 'POST':
         import pdb; pdb.set_trace()
         # clean_username = new_clean_string(form.username.data)
-        clean_username = form.username.data
+        clean_username = request.POST.get('usernameField')
+        password = request.POST.get('pwdField')
 
-        print('\n\n\n\n clean_username:  ', clean_username)
-        user = User.objects.get(username=clean_username).first()
+        print('\n\n\n clean_username:  ', clean_username)
+        print('\n\n\n password:  ', password)
+        user = User.objects.get(username=clean_username)
 
         if not user:
             # flash(u'Invalid Login. Wrong username', 'danger')
+            print('Invalid Login. Wrong username danger')
             return redirect('login')
 
-        if not check_password(user.password, form.password.data):
+        if not check_password(user.password, password):
             # flash(u'Invalid Login. Wrong password.', 'danger')
+            # print('Invalid Login. Wrong password danger')
+            print(u'Invalid Login. Wrong password danger')
             return redirect('login')
 
-        if check_password(user.password, form.password.data):
+        if check_password(user.password, password):
 
             real_user = authenticate(
                 request,
                 username=clean_username,
-                password=form.password.data
+                password=password
             )
 
             if real_user is not None:
                 login(request, real_user)
                 # flash(u'Logged in.', 'success')
-                return redirect('task_doing')
+                return redirect('admin')
             else:
                 redirect('login')
 
@@ -119,26 +120,18 @@ def cae_register(request):
             dadosLogin
         )
 
-
-# @app.route('/register/<str:action>', methods=['GET', 'POST'])
+# working
 def cae_register2(request):
     print("\n\n\n\n ENTREI NO REGISTER 2....\n\n\n\n")
-    # obj = Foo.objects.latest('id')
-    # u = Foo.objects.latest() --> u.pk
+
     form = UserForm()
     lib_r = LibRegister()
 
-    '''
-    if action == 'instruction':
-        return render_template(
-            'pre-register-cae.html',
-            myform=form
-        )
-    '''
+
     userdata = {'title': 'Register'}
     userdata['myform'] = form
 
-    if not form.is_valid() or request.method != 'POST':
+    if request.method != 'POST':
 
         return render(
             request,
@@ -148,95 +141,96 @@ def cae_register2(request):
 
 
     if request.method == 'POST':
+
         print('\n IS POST METHOS   \n')
-        if form.id_valid():   # TODO: remove this
 
-            print('\n  FORM IS LVAID  \n')
-            exists_user = User.objects.all()
+        exists_user = User.objects.all()
 
-            # clean all come in register data
-            clean_first_name = new_clean_string(request.POST.get('firstName'))
-            clean_last_name = new_clean_string(request.POST.get('lastName'))
-            clean_pwd = new_clean_string(request.POST.get('pwdField'))
-            clean_confirm_pwd = new_clean_string(request.POST.get('pwdConfirmField'))
-            clean_email = new_clean_string(request.POST.get('emailField'))
+        # clean all come in register data
+        clean_first_name = new_clean_string(request.POST.get('firstName'))
+        clean_last_name = new_clean_string(request.POST.get('lastName'))
+        clean_pwd = new_clean_string(request.POST.get('pwdField'))
+        clean_confirm_pwd = new_clean_string(request.POST.get('pwdConfirmField'))
+        clean_email = new_clean_string(request.POST.get('emailField'))
 
-            custom_username = 'cae' + '.' + clean_first_name + clean_last_name
-            # personal_username model: cae.idelfridesjorge
+        custom_username = 'cae' + '.' + clean_first_name + clean_last_name
+        # personal_username model: cae.idelfridesjorge
 
-            # database  == form come in
+        # database  == form come in
 
-            for usr in exists_user[::-1]:
-                if usr.username == custom_username:
-                    # flash("Username already exists", 'warning')
-                    return render(
-                        request,
-                        'app_saada_ong/pre-register-cae.html',
-                        userdata
-                    )
-
-                if usr.email == clean_email:
-                    # flash("User email already exists", 'warning')
-                    return render(
-                        request,
-                        'app_saada_ong/pre-register-cae.html',
-                        userdata
-                    )
-
-            if clean_pwd != clean_confirm_pwd or (len(clean_pwd) != 6):
-                # flash('Passwords do not match', 'danger')
+        for usr in exists_user[::-1]:
+            if usr.username == custom_username:
+                # flash("Username already exists", 'warning')
+                print("Username already exists warning")
                 return render(
                     request,
                     'app_saada_ong/pre-register-cae.html',
                     userdata
                 )
 
-            password = hashlib.sha1(str(clean_pwd)).hexdigest()
+            if usr.email == clean_email:
+                # flash("User email already exists", 'warning')
+                print("User email already exists warning")
+                return render(
+                    request,
+                    'app_saada_ong/pre-register-cae.html',
+                    userdata
+                )
 
-            new_user = User.objects.create_user(
-                username=custom_username,
-                password=password,
-                first_name=clean_first_name,
-                last_name=clean_last_name,
-                email=clean_email
-            )
-            new_user.save()
-            '''
-            db.session.add(new_user)
-            db.session.commit()
-            '''
-            # last_user = User.objects.last()
-            last_user_id = new_user.id
-            # TODO: get back id of the new user
-            # flash('User created successfuly', 'success')
-
-
-            respect_pronoun = (request.POST.getlist('chamar')
-                if request.POST.getlist('chamar') != 'nenhuma' else ''
-            )
-
-            data_to_send_email = {
-                "id": last_user_id,
-                "username": custom_username,
-                "password": clean_pwd,
-                "email": clean_email,
-                "tratamento": respect_pronoun,
-                "first_name": clean_first_name,
-                "last_name": clean_first_name
-            }
-
-            print(data_to_send_email)
-
-            # lib_r.cae_send_email(data_to_send_email)
-            # return redirect(url_for('login'))
-
-        if not form.validate_on_submit():
+        if clean_pwd != clean_confirm_pwd or (len(clean_pwd) != 6):
             # flash('Passwords do not match', 'danger')
+            print('Passwords do not match danger')
             return render(
                 request,
                 'app_saada_ong/pre-register-cae.html',
                 userdata
             )
+
+        password = hashlib.sha1(str(clean_pwd).encode()).hexdigest()
+        # password = hashlib.sha1(str(password).encode()).hexdigest()
+
+        new_user = User.objects.create_user(
+            username=custom_username,
+            password=password,
+            first_name=clean_first_name,
+            last_name=clean_last_name,
+            email=clean_email
+        )
+        new_user.save()
+
+        # last_user = User.objects.last()
+        last_user_id = new_user.id
+        # TODO: get back id of the new user
+        # flash('User created successfuly', 'success')
+
+
+        respect_pronoun = (request.POST.get('chamar')
+            if request.POST.get('chamar') != 'nenhuma' else ''
+        )
+
+        data_to_send_email = {
+            "id": last_user_id,
+            "username": custom_username,
+            "password": clean_pwd,
+            "email": clean_email,
+            "tratamento": respect_pronoun,
+            "first_name": clean_first_name,
+            "last_name": clean_first_name
+        }
+
+        print('\n  IT WORKED  \n')
+
+        print('-'*70)
+
+        print(data_to_send_email)
+
+        print('-'*70)
+
+        lib_r.cae_send_email(data_to_send_email)
+        # return redirect(url_for('login'))
+
+        return render('login')
+
 
 
 # @login_required
