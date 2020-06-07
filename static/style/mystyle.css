@@ -24,7 +24,16 @@ div#main-content{
     padding: 130px 0;
     background-color: rgba(239, 186, 129, 1);
     /* margin-bottom: -15.5%;*/
-    margin-bottom: -9.5%;
+    margin-bottom: -10%;
+    z-index: 1;
+}
+
+#cae_color_login_page{
+    position: relative;
+    padding: 130px 0;
+    background-color: rgba(239, 186, 129, 1);
+    /* margin-bottom: -15.5%;*/
+    margin-bottom: -13%;
     z-index: 1;
 }
 

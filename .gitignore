@@ -10,7 +10,7 @@ pagecapvenv/
 helper_folder/
 helper_ignored/
 doc.text
-
+CAE_ENV/
 # -----------------------------------
 
 # Byte-compiled / optimized / DLL files

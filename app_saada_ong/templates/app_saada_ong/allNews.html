@@ -110,8 +110,8 @@
                                 <img class="card-img-top" src="../../../media/{{the_news.image_notícia}}" alt="News image" style="max-width:320px;">
                                 <div class="card-body">
                                     <h4 class="card-title text-capitalize text-muted border">{{ the_news.título_notícia }}</h4>
-                                    <p class="card-text">{{ the_news.noticia }}</p>
-                                    <a href="{% url 'go2showonenews' the_news.id %}" class="btn btn-primary stretched-link">Read More...</a>
+                                    <textarea class="form-control border-0" resize="none" rows="3" >{{ the_news.noticia }}</textarea>
+                                    <a href="{% url 'go2showonenews' the_news.id %}" class="btn btn-primary stretched-link mt-3">Read More...</a>
                                 </div>
                             </div>
                         </li>

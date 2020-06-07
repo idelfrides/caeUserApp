@@ -23,7 +23,6 @@ import hashlib
 
 
 
-# TODO: remove form on tamplate login, use only bootstrap
 # TODO: TESTE LOGIN AND REGISTER FEATURES
 
 
@@ -67,7 +66,7 @@ def cae_login(request):
         # import pdb; pdb.set_trace()
         return render(
             request,
-            'app_saada_ong/login.html',
+            'app_saada_ong/loginWithoutForm.html',
             dadosLogin
         )
 
@@ -103,6 +102,7 @@ def cae_login(request):
                 redirect('login')
 
 
+# not used
 def cae_register(request):
 
     print('\n\n\n\n ENTREI NO REGISTER \n\n\n')
@@ -148,8 +148,10 @@ def cae_register2(request):
 
 
     if request.method == 'POST':
+        print('\n IS POST METHOS   \n')
         if form.id_valid():   # TODO: remove this
 
+            print('\n  FORM IS LVAID  \n')
             exists_user = User.objects.all()
 
             # clean all come in register data
@@ -225,7 +227,7 @@ def cae_register2(request):
 
             print(data_to_send_email)
 
-            lib_r.cae_send_email(data_to_send_email)
+            # lib_r.cae_send_email(data_to_send_email)
             # return redirect(url_for('login'))
 
         if not form.validate_on_submit():
