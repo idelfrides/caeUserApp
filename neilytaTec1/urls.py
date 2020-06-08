@@ -41,7 +41,6 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     # path('login/', include('admin.site.urls'), name='url__real_login'),
 
-    # several home route
 
     path('', home, name='url_home'),
     path('listagem/', listagem, name='url_listagem'),
@@ -50,7 +49,6 @@ urlpatterns = [
     path('projeto/<int:id_project>/', showProjeto, name='go2thisproject'),
     path('allnoticias/', listAllNews, name='go2allnews'),
     path('noticia/<int:id_news>/', showOneNews, name='go2showonenews'),
-
 
 
     path('create/<int:pk>/', create, name='go2create'),

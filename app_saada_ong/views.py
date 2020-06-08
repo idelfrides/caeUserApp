@@ -231,8 +231,7 @@ def listAllProjects(request):
 
     dadosProjeto = {'title': 'Projetos'}
     dadosProjeto['project'] = Projetos.objects.filter(ativo=True)
-    # dadosProjeto['project'] = Projetos.objects.filter(nome_projeto)
-    # nome_projeto = dados.name_projetos
+
     return render(
         request,
         'app_saada_ong/listarCuros.html',
@@ -261,12 +260,6 @@ def listAllNews(request):
     news_data = {'title': 'Noticias'}
     news_data['allnews'] = Noticias.objects.filter(ativa=True)
     news_data['projects'] = Projetos.objects.filter(ativo=True)
-
-    '''
-    dadosProjeto = {}
-    dadosProjeto['projects'] = Projetos.objects.all()
-    '''
-    # import pdb; pdb.set_trace()
 
     return render(
         request,
