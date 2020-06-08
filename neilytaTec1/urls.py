@@ -16,7 +16,7 @@ Including another URLconf
 
 
 from django.contrib import admin
-from django.urls import path
+from django.urls import path, include
 from django.conf.urls.static import static
 from django.conf import settings
 from app_saada_ong.views import home
@@ -31,7 +31,7 @@ from app_saada_ong.views import update
 from app_saada_ong.views import remove
 from app_saada_ong.views import create
 from app_saada_ong.views import cae_login
-from app_saada_ong.views import cae_register2
+from app_saada_ong.views import cae_register
 
 # app_neilytaTec1
 # app_saada_ong
@@ -39,25 +39,21 @@ from app_saada_ong.views import cae_register2
 urlpatterns = [
     # admin route
     path('admin/', admin.site.urls),
+    # path('login/', include('admin.site.urls'), name='url__real_login'),
 
     # several home route
 
     path('', home, name='url_home'),
-
-    # path('/', home, name='url_home'),
-    # path('index/', home, name='url_home'),
-    # path('home/', home, name='url_home'),
-
-    path('create/<int:pk>/', create, name='go2create'),
-    # path('listagem/', listagem, name='url_listagem'),
     path('listagem/', listagem, name='url_listagem'),
-
-    path('register/', cae_register2, name='url_register'),
-    path('login/', cae_login, name='url_login'),
+    path('register/', cae_register, name='url_register'),
+    path('login2/', cae_login, name='url_login'),
     path('projeto/<int:id_project>/', showProjeto, name='go2thisproject'),
     path('allnoticias/', listAllNews, name='go2allnews'),
     path('noticia/<int:id_news>/', showOneNews, name='go2showonenews'),
 
+
+
+    path('create/<int:pk>/', create, name='go2create'),
     path('listar_prof/', listarProf, name='go2listarprof'),
     path('listar_alunos/', listarAlunos, name='go2listaralunos'),
     # path('listar_cursos/', listarCursos, name='go2listarcursos'),

@@ -109,7 +109,8 @@ class LibRegister(object):
         # TODO: USE RENDER STEAD REDIRECT . otherwise ok
         # TODO: CREATE ENDPOINT register_instructions
 
-        return redirect('register_instructions')
+        # return redirect('register_instructions')
+        return
 
         '''
         new_user_data = {'name': name_to_view}

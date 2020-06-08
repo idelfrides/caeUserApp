@@ -14,7 +14,8 @@ class UserForm(ModelForm):
             'password',
             'email',
             'first_name',
-            'last_name'
+            'last_name',
+            'groups',
         ]
 
 

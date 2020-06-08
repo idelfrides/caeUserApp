@@ -1,4 +1,6 @@
 from django.shortcuts import render, redirect
+from django.contrib import admin
+from django.urls import path
 
 from app_saada_ong.models import Professores
 from app_saada_ong.models import Alunos
@@ -11,11 +13,10 @@ from app_saada_ong.formsApp import ProfForm
 from app_saada_ong.formsApp import AlunoForm
 from app_saada_ong.formsApp import CursoForm
 from app_saada_ong.formsApp import UserForm
-# from app_saada_ong.formsApp import UserRegisterForm
 
 from app_saada_ong.controllers.cae_helper import new_clean_string
 from app_saada_ong.controllers.lib_register import LibRegister
-from django.contrib.auth.models import User
+from django.contrib.auth.models import User, Group
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login
 
@@ -23,8 +24,8 @@ import hashlib
 
 
 
-# TODO: TESTE LOGIN  FEATURE. check_password is makning trouble.
-#   I need to study about it.
+# TODO: SHOW SIGNAL  ALERT
+# TODO: make logic to filter by active
 
 
 '''
@@ -38,7 +39,7 @@ def home(request):
     dados_evento = {'title': 'Home'}
     dados_evento['title_secao_ev'] = 'evento'
     dados_evento['evento'] = Evento.objects.all()
-    dados_evento['projects'] = Projetos.objects.all()
+    dados_evento['projects'] = Projetos.objects.filter(ativo=True)
 
     return render(
         request,
@@ -46,9 +47,9 @@ def home(request):
         dados_evento
     )
 
-# {% url 'register' %}"  myform.csrf_token
 
 # @app.route('/login', methods=['GET', 'POST'])
+# not used
 def cae_login(request):
 
     print('\n\n\n\n ENTREI NO LOGIN \n\n\n')
@@ -67,7 +68,7 @@ def cae_login(request):
         )
 
     if  request.method == 'POST':
-        import pdb; pdb.set_trace()
+
         # clean_username = new_clean_string(form.username.data)
         clean_username = request.POST.get('usernameField')
         password = request.POST.get('pwdField')
@@ -81,6 +82,7 @@ def cae_login(request):
             print('Invalid Login. Wrong username danger')
             return redirect('login')
 
+        '''
         if not check_password(user.password, password):
             # flash(u'Invalid Login. Wrong password.', 'danger')
             # print('Invalid Login. Wrong password danger')
@@ -88,23 +90,27 @@ def cae_login(request):
             return redirect('login')
 
         if check_password(user.password, password):
+        '''
 
-            real_user = authenticate(
-                request,
-                username=clean_username,
-                password=password
-            )
+        real_user = authenticate(
+            request,
+            username=clean_username,
+            password=password
+        )
 
-            if real_user is not None:
-                login(request, real_user)
-                # flash(u'Logged in.', 'success')
-                return redirect('admin')
-            else:
-                redirect('login')
+        if real_user is not None:
+            login(request, real_user)
+            # flash(u'Logged in.', 'success')
+            print('Logged in. --> success')
+            # return redirect('admin')
+            return redirect('url__real_login')
+        else:
+            print('Invalid Login. Wrong username informed')
+            return redirect('login')
 
 
 # not used
-def cae_register(request):
+def cae_register_not_used(request):
 
     print('\n\n\n\n ENTREI NO REGISTER \n\n\n')
 
@@ -120,8 +126,9 @@ def cae_register(request):
             dadosLogin
         )
 
+
 # working
-def cae_register2(request):
+def cae_register(request):
     print("\n\n\n\n ENTREI NO REGISTER 2....\n\n\n\n")
 
     form = UserForm()
@@ -142,8 +149,6 @@ def cae_register2(request):
 
     if request.method == 'POST':
 
-        print('\n IS POST METHOS   \n')
-
         exists_user = User.objects.all()
 
         # clean all come in register data
@@ -155,8 +160,6 @@ def cae_register2(request):
 
         custom_username = 'cae' + '.' + clean_first_name + clean_last_name
         # personal_username model: cae.idelfridesjorge
-
-        # database  == form come in
 
         for usr in exists_user[::-1]:
             if usr.username == custom_username:
@@ -186,23 +189,22 @@ def cae_register2(request):
                 userdata
             )
 
-        password = hashlib.sha1(str(clean_pwd).encode()).hexdigest()
-        # password = hashlib.sha1(str(password).encode()).hexdigest()
 
         new_user = User.objects.create_user(
             username=custom_username,
-            password=password,
+            password=clean_pwd,
             first_name=clean_first_name,
             last_name=clean_last_name,
             email=clean_email
         )
         new_user.save()
 
-        # last_user = User.objects.last()
         last_user_id = new_user.id
-        # TODO: get back id of the new user
+
         # flash('User created successfuly', 'success')
 
+        connect_group = Group.objects.get(name='connectUserGroup')
+        new_user.groups.add(connect_group)
 
         respect_pronoun = (request.POST.get('chamar')
             if request.POST.get('chamar') != 'nenhuma' else ''
@@ -218,26 +220,17 @@ def cae_register2(request):
             "last_name": clean_first_name
         }
 
-        print('\n  IT WORKED  \n')
-
-        print('-'*70)
-
-        print(data_to_send_email)
-
-        print('-'*70)
-
         lib_r.cae_send_email(data_to_send_email)
         # return redirect(url_for('login'))
 
-        return render('login')
-
+        return redirect('url_home')
 
 
 # @login_required
 def listAllProjects(request):
 
     dadosProjeto = {'title': 'Projetos'}
-    dadosProjeto['project'] = Projetos.objects.all()
+    dadosProjeto['project'] = Projetos.objects.filter(ativo=True)
     # dadosProjeto['project'] = Projetos.objects.filter(nome_projeto)
     # nome_projeto = dados.name_projetos
     return render(
@@ -266,8 +259,8 @@ def showProjeto(request, id_project):
 def listAllNews(request):
 
     news_data = {'title': 'Noticias'}
-    news_data['allnews'] = Noticias.objects.filter(ativa=True).all()
-    news_data['projects'] = Projetos.objects.all()
+    news_data['allnews'] = Noticias.objects.filter(ativa=True)
+    news_data['projects'] = Projetos.objects.filter(ativo=True)
 
     '''
     dadosProjeto = {}
@@ -288,13 +281,51 @@ def showOneNews(request, id_news):
 
     news_data = {'title': 'Noticias'}
     news_data['one_news'] = Noticias.objects.get(id=id_news)
-    news_data['projects'] = Projetos.objects.all()
+    news_data['projects'] = Projetos.objects.filter(ativo=True)
 
     return render(
         request,
         'app_saada_ong/oneNews.html',
         news_data
     )
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 # ================================= NEILITA TEC 1 =====================================
