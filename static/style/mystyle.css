@@ -53,3 +53,7 @@ div#main-content{
     background-color: #ffffff;
     z-index: 2;
 }
+
+.test_bg{
+    background-color: rgba(239, 186, 129, 1);
+}

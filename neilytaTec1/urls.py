@@ -32,6 +32,8 @@ from app_saada_ong.views import remove
 from app_saada_ong.views import create
 from app_saada_ong.views import cae_login
 from app_saada_ong.views import cae_register
+from app_saada_ong.views import instruction_page
+
 
 # app_neilytaTec1
 # app_saada_ong
@@ -45,6 +47,7 @@ urlpatterns = [
     path('', home, name='url_home'),
     path('listagem/', listagem, name='url_listagem'),
     path('register/', cae_register, name='url_register'),
+    path('instruction/', instruction_page, name='url_instruction'),
     path('login/', cae_login, name='url_login'),
     path('projeto/<int:id_project>/', showProjeto, name='go2thisproject'),
     path('allnoticias/', listAllNews, name='go2allnews'),

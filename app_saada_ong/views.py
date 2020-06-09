@@ -158,6 +158,11 @@ def cae_register(request):
         clean_confirm_pwd = new_clean_string(request.POST.get('pwdConfirmField'))
         clean_email = new_clean_string(request.POST.get('emailField'))
 
+        # make all lowercase
+        clean_first_name = clean_first_name.lower()
+        clean_last_name = clean_last_name.lower()
+        clean_email = clean_email.lower()
+
         custom_username = 'cae' + '.' + clean_first_name + clean_last_name
         # personal_username model: cae.idelfridesjorge
 
@@ -217,13 +222,36 @@ def cae_register(request):
             "email": clean_email,
             "tratamento": respect_pronoun,
             "first_name": clean_first_name,
-            "last_name": clean_first_name
+            "last_name": clean_last_name
         }
 
-        lib_r.cae_send_email(data_to_send_email)
+        name_to_view = lib_r.cae_send_email(data_to_send_email)
         # return redirect(url_for('login'))
 
-        return redirect('url_home')
+        userdata_inst = {'title': 'Complete Register instruction '}
+        userdata_inst['user_name'] = name_to_view
+
+        return render(
+            request,
+            'app_saada_ong/instructionsPage.html',
+            userdata_inst
+        )
+
+
+def instruction_page(request):
+    form = UserForm()
+    lib_r = LibRegister()
+
+    userdata = {'title': 'Complete Register instruction '}
+    userdata['myform'] = form
+
+    if request.method != 'POST':
+
+        return render(
+            request,
+            'app_saada_ong/instructionsPage.html',
+            userdata
+        )
 
 
 # @login_required

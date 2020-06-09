@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>CAE | {{ title }}</title>
+    <title>{{ title }}</title>
     <meta name="description" content=" MINICURSO DHANGO 2.2.1 | JUN/2019">
     <meta name="keywords" content="DJANGO, PYTHON, HTML,CSS">
     <meta name="author" content="IDELFRIDES JORGE">
@@ -16,11 +16,12 @@
     <link rel="stylesheet" href="../../../static/style/app_css.css">
     <link rel="stylesheet" href="../../../static/style/mystyle.css">
 
+    <!--
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.0/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    -->
 
-    <script src="../../../static/js_files/app_js.js" type="text/javascript" language="javascript"></script>
 
     <style>
         .carousel-inner{
@@ -102,6 +103,90 @@
                 <button type="submit" class="btn btn-primary px-5 w-100 font-weight-bold">Register</button>
             </form>
         </div>
+
+        <!-- INSTRUCTIONS REGISTER MODAL BEGIN HERE -->
+        <br><br>
+
+        <!-- Update Task Modal-->
+        <div class="modal shadow-lg p-5 fade rounded" id="instructionPage">
+            <div class="modal-dialog modal-md modal-dialog-centered modal-dialog-scrollable rounded">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header bg-success">
+                    <h4 class="modal-title text-white font-weight-bolder">Completar Cadastro</h4>
+                    <button type="button" class="close" data-dismiss="modal" disabled>&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body text-muted">
+                    <h5 class="text-capitalize ml-2"> Prezado(a) <br><br> <strong class="text-capitalize">{{ user_name }}</strong></h5>
+                    <br>
+                    <p class="ml-2">
+                        Seja bem-vindo(a) a CONNECT AFRICA EDUCATION.
+                        <strong>O seu <em>pré-cadastro</em> foi realizado com Sucesso .</strong>
+                        Estamos felizes por estar a juntar-se a nós nessa jornada de
+                        crescimento pessoal e financeiro.
+                        Asseguramos que esta é a melhor decisão que você escolheu para
+                        sua vida.
+                        <br>
+                        Enviamos Instruções para completar o cadastro para o seu e-mail.
+                        <br>
+
+                        Acesso o seu e-mail e complete o seu cadastro.
+                        Lembramos que os dados do e-mail têm validade de 6h a partir de agora!
+                        <br>
+                        Corre lá e complete o seu cadastro.
+                        <br>
+                        Até logo,...
+
+                        <hr>
+                        Equipe CONNECT AFRICA EDUCATION
+                        <br>
+                        Unindo cérebros para gerar riqueza
+                    </p>
+
+                    <br>
+                    <button type="button" class="btn w-100 btn-info font-weight-bold" data-dismiss="modal">Entendido</button>
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer bg-success">
+                    <button type="button" class="btn btn-success" title="Use o botão acima"  data-dismiss="modal" disabled></button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <br><br><br>
+        </div> <!-- /container -->
+
+        <!-- Optional JavaScript -->
+        <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+        <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+        integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+        crossorigin="anonymous">
+        </script>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+        integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+        crossorigin="anonymous">
+        </script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+        integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+        crossorigin="anonymous">
+        </script>
+
+        <script>
+            $(document).ready(function () {
+            $('#instructionPage').modal('show');
+            });
+        </script>
+
+        <script src="../../../static/js_files/app_js.js" type="text/javascript" language="javascript"></script>
+
+
         <br><br><br><br>
         <br><br><br><br>
         <div class="container mx-auto border border-bottom border-dark">

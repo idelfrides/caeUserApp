@@ -71,7 +71,7 @@ class LibRegister(object):
         subject_help = data_to_send_email['tratamento'] + ' ' + data_to_send_email['first_name']
         pronoun_first_name = subject_help.strip()
         subject = 'Prezado(a) \n' + pronoun_first_name + ' ' + data_to_send_email['last_name']
-        name_to_view = 'Prezado(a) \n' + pronoun_first_name + ' ' + data_to_send_email['last_name']
+        name_to_view =  pronoun_first_name + '  ' + data_to_send_email['last_name']
 
 
         print(content_msg)
@@ -110,7 +110,7 @@ class LibRegister(object):
         # TODO: CREATE ENDPOINT register_instructions
 
         # return redirect('register_instructions')
-        return
+        return name_to_view
 
         '''
         new_user_data = {'name': name_to_view}
