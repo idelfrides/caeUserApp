@@ -1,6 +1,6 @@
 # My ignored files/folders go here
 
-# .gitignore
+.gitignore
 .vscode/
 .idea/
 test.sql
@@ -11,6 +11,8 @@ helper_folder/
 helper_ignored/
 doc.text
 CAE_ENV/
+
+migrations/
 # -----------------------------------
 
 # Byte-compiled / optimized / DLL files

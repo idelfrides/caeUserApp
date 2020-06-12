@@ -33,6 +33,7 @@ from app_saada_ong.views import create
 from app_saada_ong.views import cae_login
 from app_saada_ong.views import cae_register
 from app_saada_ong.views import instruction_page
+from app_saada_ong.views import listAllConnectPeople
 
 
 # app_neilytaTec1
@@ -51,6 +52,7 @@ urlpatterns = [
     path('login/', cae_login, name='url_login'),
     path('projeto/<int:id_project>/', showProjeto, name='go2thisproject'),
     path('allnoticias/', listAllNews, name='go2allnews'),
+    path('allpeople/', listAllConnectPeople, name='url_allpeople'),
     path('noticia/<int:id_news>/', showOneNews, name='go2showonenews'),
 
 

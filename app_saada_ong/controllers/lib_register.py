@@ -28,7 +28,7 @@ class LibRegister(object):
         print(check_key)
 
         endpoint = 'login2complete_register'
-        link2finish_register = 'https://connectafricaeducation.com/{0}?key={1}'.format(endpoint, check_key)
+        link2finish_register = "https://connectafricaeducation.com/{endpoint}?key={check_key}".format(endpoint, check_key)
 
         content_msg = '''
 

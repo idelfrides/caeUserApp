@@ -99,11 +99,11 @@ span{
 
 
 .news_stype:hover{
-    box-shadow: 0px 13px 13px 0   rgba(255, 255, 255, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    box-shadow: 0px 13px 13px 0  rgba(255, 255, 255, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     padding-right: 10px;
     margin-top: 10px;
     width: 340px;
-    border: 5px solid rgba(239, 186, 129, 1);
+    border: 3px solid rgba(239, 186, 129, 1);
 }
 /* -------------------------------------------------------
                         FOOTER STYLE

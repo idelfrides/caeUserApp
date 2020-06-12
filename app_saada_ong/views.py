@@ -8,11 +8,13 @@ from app_saada_ong.models import Evento
 from app_saada_ong.models import Cursos
 from app_saada_ong.models import Projetos
 from app_saada_ong.models import Noticias
+from app_saada_ong.models import ConnectPeople
 
 from app_saada_ong.formsApp import ProfForm
 from app_saada_ong.formsApp import AlunoForm
 from app_saada_ong.formsApp import CursoForm
 from app_saada_ong.formsApp import UserForm
+
 
 from app_saada_ong.controllers.cae_helper import new_clean_string
 from app_saada_ong.controllers.lib_register import LibRegister
@@ -20,12 +22,12 @@ from django.contrib.auth.models import User, Group
 from django.contrib.auth.hashers import check_password
 from django.contrib.auth import authenticate, login
 
+
 import hashlib
 
 
 
 # TODO: SHOW SIGNAL  ALERT
-# TODO: make logic to filter by active
 
 
 '''
@@ -284,6 +286,7 @@ def showProjeto(request, id_project):
 
 
 def listAllNews(request):
+    """ Retrive all connect people """
 
     news_data = {'title': 'Noticias'}
     news_data['allnews'] = Noticias.objects.filter(ativa=True)
@@ -294,6 +297,21 @@ def listAllNews(request):
         'app_saada_ong/allNews.html',
         news_data
     )
+
+
+def listAllConnectPeople(request):
+    """ Retrive all connect people """
+
+    people_data = {'title': 'Connect People'}
+    people_data['allpeople'] = ConnectPeople.objects.filter(ativo=True)
+    people_data['projects'] = Projetos.objects.filter(ativo=True)
+
+    return render(
+        request,
+        'app_saada_ong/allConnectPeople.html',
+        people_data
+    )
+
 
 
 def showOneNews(request, id_news):
