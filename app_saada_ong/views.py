@@ -9,6 +9,7 @@ from app_saada_ong.models import Cursos
 from app_saada_ong.models import Projetos
 from app_saada_ong.models import Noticias
 from app_saada_ong.models import ConnectPeople
+from app_saada_ong.models import ConnectBusiness
 
 from app_saada_ong.formsApp import ProfForm
 from app_saada_ong.formsApp import AlunoForm
@@ -26,8 +27,10 @@ from django.contrib.auth import authenticate, login
 import hashlib
 
 
-
 # TODO: SHOW SIGNAL  ALERT
+# TODO: RESOLVER O TROUBLE RE CLICAR FORA DO MODAL (MANTÉM O PEOPLE ANTERIOR)
+# TODO: RESOLVER TEXTO DESPROPORCIONAL NO ONE BUSINESS
+# TODO: 
 
 
 '''
@@ -41,7 +44,7 @@ def home(request):
     dados_evento = {'title': 'Home'}
     dados_evento['title_secao_ev'] = 'evento'
     dados_evento['evento'] = Evento.objects.all()
-    dados_evento['projects'] = Projetos.objects.filter(ativo=True)
+    # dados_evento['projects'] = Projetos.objects.filter(ativo=True)
 
     return render(
         request,
@@ -50,6 +53,7 @@ def home(request):
     )
 
 
+# CAEorang-removebg-previewPng.png
 # @app.route('/login', methods=['GET', 'POST'])
 # not used
 def cae_login(request):
@@ -285,6 +289,100 @@ def showProjeto(request, id_project):
     )
 
 
+def showOneBusiness(request, id_business):
+
+    if not id_business:
+        raise KeyError('''WARNING: Param  "id_business" is Required
+                        INFORME the business id to retrieve.\n\n''')
+
+    # import pdb; pdb.set_trace()
+
+    dadosProjeto = {'title': 'Business'}
+
+    _business = ConnectBusiness.objects.get(id=id_business)
+
+    dadosProjeto['projects'] = _business
+
+
+    if _business.link_linkedin:
+        dadosProjeto['link_linkedin'] = _business.link_linkedin
+        dadosProjeto['open_tab'] = '_blank'
+    else:
+        dadosProjeto['link_linkedin'] = '#'
+        dadosProjeto['open_tab'] = '_self'
+
+
+    if _business.link_instagram:
+        dadosProjeto['link_instagram'] = _business.link_instagram
+        dadosProjeto['open_tab'] = '_blank'
+    else:
+        dadosProjeto['link_instagram'] = '#'
+        dadosProjeto['open_tab'] = '_self'
+
+
+    if _business.link_facebook:
+        dadosProjeto['link_facebook'] = _business.link_facebook
+        dadosProjeto['open_tab'] = '_blank'
+    else:
+        dadosProjeto['link_facebook'] = '#'
+        dadosProjeto['open_tab'] = '_self'
+
+
+    the_owner = ConnectPeople.objects.get(
+        nome_profissional=_business.dono_projeto)
+
+    dadosProjeto['chosen_id_project'] = id_business
+
+    dadosProjeto['owner_acad_bg'] = the_owner.formacao_academica
+
+    dadosProjeto['ownerID'] = the_owner.id
+
+
+    return render(
+        request,
+        'app_saada_ong/showOneBusiness.html',
+        dadosProjeto
+    )
+
+
+def showOnePeople(request, id_people):
+
+    if not id_people:
+        raise KeyError('WARNING: Param  "id_people" is Required \n INFORME the business id to retrieve\n\n')
+
+
+    people_data = {'title': 'Connect People'}
+
+    allpeople = ConnectPeople.objects.filter(ativo=True)
+
+    one_connect_people = allpeople.get(id=id_people)
+
+    people_data['thepeople'] = one_connect_people
+
+
+    if one_connect_people.site_da_sua_empresa:
+
+        people_data['site_da_sua_empresa'] = one_connect_people.site_da_sua_empresa
+
+        people_data['open_tab'] = '_blank'
+
+    else:
+
+        people_data['site_da_sua_empresa']  = '#'
+
+        people_data['open_tab'] = '_self'
+
+
+    people_data['allpeople'] = allpeople
+
+
+    return render(
+        request,
+        'app_saada_ong/showOnePeople.html',
+        people_data
+    )
+
+
 def listAllNews(request):
     """ Retrive all connect people """
 
@@ -304,7 +402,7 @@ def listAllConnectPeople(request):
 
     people_data = {'title': 'Connect People'}
     people_data['allpeople'] = ConnectPeople.objects.filter(ativo=True)
-    people_data['projects'] = Projetos.objects.filter(ativo=True)
+    # people_data['projects'] = Projetos.objects.filter(ativo=True)
 
     return render(
         request,
@@ -312,6 +410,19 @@ def listAllConnectPeople(request):
         people_data
     )
 
+
+def listAllConnectBusiness(request):
+    """ Retrive all connect people """
+
+    people_data = {'title': 'Connect Business'}
+    people_data['allbusiness'] = ConnectBusiness.objects.filter(ativo=True)
+    # people_data['projects'] = Projetos.objects.filter(ativo=True)
+
+    return render(
+        request,
+        'app_saada_ong/allConnectBusiness.html',
+        people_data
+    )
 
 
 def showOneNews(request, id_news):

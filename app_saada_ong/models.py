@@ -47,10 +47,10 @@ COUNTRY_CHOICE = [
 ]
 
 BR_STATES_CHOICE = [
-    ('SÃO PAULO', 'SÃO PAULO'),
-    ('RIO DE JANEIRO', 'RIO DE JANEIRO'),
-    ('MINAS GERAIS', 'MINAS GERAIS'),
-    ('ESPÍRITO SANTO', 'ESPÍRITO SANTO'),
+    ('SÃO PAULO', 'São Paulo'),
+    ('RIO DE JANEIRO', 'Rio de Janeiro'),
+    ('MINAS GERAIS', 'Minas Gerais'),
+    ('ESPÍRITO SANTO', 'Espírito Santo'),
     ('CEARÁ', 'Ceará'),
     ('BAHIA', 'Bahia'),
     ('SANTA CATARINA', 'Santa Catarina'),
@@ -58,7 +58,7 @@ BR_STATES_CHOICE = [
     ('RIO GRANDE OD NORTE', 'Rio Grande do Norte'),
     ('ESPÍRITO SANTO', 'Paraná'),
     ('Mato Grosso', 'Mato Grosso'),
-    ('OUTRO', 'outro'),
+    ('OUTRO', 'OUTRO'),
 ]
 
 
@@ -81,15 +81,15 @@ STATES_CHOICE = [
 class ConnectPeople(models.Model):
     ''' connect people table/model '''
 
-    nome_usuario = models.ForeignKey(
+    # ONE-TO-ONE RELATIONSHIP
+    usuario = models.OneToOneField(
         User,
-        on_delete=models.PROTECT,
-        default=7
+        on_delete=models.PROTECT
     )
 
+    # default=7
     nome_profissional = models.CharField(
-        max_length=255,
-        default='Será apresentado no site (apenas 2) *'
+        max_length=255
     )
 
     imagem_perfil = models.ImageField(upload_to='images/connectPeople/')
@@ -101,13 +101,13 @@ class ConnectPeople(models.Model):
     )
 
     cargo_atual = models.CharField(
-        max_length=100,
-        default='Escreva o cargo que desempenha hoje aqui * ')
+        max_length=100
+    )
 
     sua_empresa = models.CharField(
         max_length=200,
         blank=True,
-        default='Escreva o nome da sua empresa *')
+        default='O nome da sua empresa *')
 
     site_da_sua_empresa = models.URLField(
         blank=True)
@@ -122,21 +122,28 @@ class ConnectPeople(models.Model):
         default='005588999965504'
     )
 
+    br_estado = models.CharField(
+        max_length=50,
+        choices=BR_STATES_CHOICE
+    )
+
     estado = models.CharField(
-        max_length=20,
-        default='O seu Estado/província/região *')
+        max_length=25,
+        default='O seu Estado/Província',
+        help_text="<p>Se você marcou <strong>OUTRO</strong> no campo acima, digite aqui o seu Estado/Província !</p>",
+        blank=True
+    )
 
     pais_de_nacionalidade = models.CharField(
-        max_length=70,
-        default='O seu país de nacionalidade')
+        max_length=70
+    )
 
     data_do_nascimento = models.DateField()
 
     genero = models.CharField(max_length=9, choices=GENDER_CHOICE)
 
     formacao_academica = models.CharField(
-        max_length=100,
-        default='Sua formação acadêmica'
+        max_length=100
     )
 
     ocupacao = models.CharField(
@@ -146,8 +153,7 @@ class ConnectPeople(models.Model):
     )
 
     linguas = models.CharField(
-        max_length=255,
-        default='Linguas que você fala'
+        max_length=255
     )
 
     areas_de_interesse = models.TextField(
@@ -181,6 +187,63 @@ class ConnectPeople(models.Model):
 
     class Meta:
         verbose_name_plural='Cadastro do Connect People'
+
+
+
+class ConnectBusiness(models.Model):
+    ''' Business model '''
+
+    nome_projeto = models.CharField(max_length=225)
+
+    # MANY-TO-ONE RELATIONSHIP
+    dono_projeto = models.ForeignKey(
+        ConnectPeople,
+        on_delete = models.PROTECT
+    )
+
+    logotipo_projeto = models.ImageField(upload_to='images/connectBusiness/')
+
+    slogan_projeto= models.CharField(max_length=255,
+                                    blank=True,
+                                    default='Slogan do projeto')
+
+
+    descricao_resumida = models.TextField(
+        max_length=180,
+        help_text="<p><strong>AVISO: </strong> Esta é a descrição que irá aparecer na visualização de todos os business. 180 caractéres no máximo!</p>"
+    )
+
+    descricao = models.TextField(help_text="<p>Descreve aqui quais valores o seu business gera a outros business ou pessoas *</p>")
+
+    link_do_site = models.URLField()
+
+    link_linkedin = models.URLField(blank=True)
+
+    link_facebook = models.URLField(blank=True)
+
+    link_instagram = models.URLField(blank=True)
+
+    ativo = models. BooleanField(
+        default=True,
+        help_text="<p>Se você não quiser que este projeto de Business seja visualizado no site, DESMARQUE este campo!</p>")
+
+
+    atualizar = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False
+    )
+
+    data_hora_criação = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return  self.nome_projeto
+
+    class Meta:
+        verbose_name_plural='Registro de Projetos de Business'
+
 
 
 
@@ -312,7 +375,6 @@ class Noticias(models.Model):
 
     class Meta:
         verbose_name_plural='Noticias'
-
 
 
 

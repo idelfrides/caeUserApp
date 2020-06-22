@@ -34,6 +34,10 @@ from app_saada_ong.views import cae_login
 from app_saada_ong.views import cae_register
 from app_saada_ong.views import instruction_page
 from app_saada_ong.views import listAllConnectPeople
+from app_saada_ong.views import listAllConnectBusiness
+from app_saada_ong.views import showOneBusiness
+from app_saada_ong.views import showOnePeople
+
 
 
 # app_neilytaTec1
@@ -53,8 +57,17 @@ urlpatterns = [
     path('projeto/<int:id_project>/', showProjeto, name='go2thisproject'),
     path('allnoticias/', listAllNews, name='go2allnews'),
     path('allpeople/', listAllConnectPeople, name='url_allpeople'),
-    path('noticia/<int:id_news>/', showOneNews, name='go2showonenews'),
+    path('allbusiness/', listAllConnectBusiness, name='url_allbusiness'),
+    path('business/<int:id_business>/',
+        showOneBusiness,
+        name='url_showonebusiness'
+    ),
+    path('people/<int:id_people>/',
+        showOnePeople,
+        name='url_oneconnectpeople'
+    ),
 
+    path('noticia/<int:id_news>/', showOneNews, name='go2showonenews'),
 
     path('create/<int:pk>/', create, name='go2create'),
     path('listar_prof/', listarProf, name='go2listarprof'),

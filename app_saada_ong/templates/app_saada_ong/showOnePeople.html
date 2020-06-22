@@ -87,8 +87,8 @@
 
 
         <!-- ************ ALL NEWS HERE ************** -->
-        <div class="container-fluid w-100 py-0 px-0 mx-0 news_saada_background">
-            <section id="evento" class="container-fluid border border-dark w-100 pb-5 mx-0 pt-1 news_bg">
+        <div class="container-fluid w-100 py-0 mx-0 news_saada_background">
+            <section id="evento" class="container-fluid border border-dark w-100 pb-5 pt-1 news_bg">
                 <header class="my-5" >
                     <h1 class="col-12 col-sm-12 text-white font-weight-bold text-uppercase text-center" style="font-size: 2em;">
                         Veja aqui os connect people que pode ser seu parceiro/a de business
@@ -96,23 +96,16 @@
                     </h1>
                 </header> <br><br><br>
 
-                <div class="mb-5 w-100">
+                <div class="container-fluid pb-5 mb-5 mx-auto">
                     {% for people in allpeople %}
-                    <ul class="d-inline-block col-sm-12 col-md-4 col-lg-4 col-xl-2 mx-sm-1 mx-md-2 mx-lg-2 mx-xl-5 ml-xl-5">
+                    <ul class="d-inline-block mx-auto">
                         <li class="row col w-10 d-inline-block mx-auto">
-                            <div class="card border-dark  mx-auto news_stype" style="max-width:320px; width:320px;">
-                                <img class="card-img-top"
-                                    src="../../../media/{{people.imagem_perfil}}"
-                                    alt="Connect people image" style="max-width:320px;">
+                            <div class="card border-dark mx-auto news_stype" style="max-width:320px; width:320px;">
+                                <img class="card-img-top" src="../../../media/{{people.imagem_perfil}}" alt="Connect people imagem" style="max-width:320px;">
                                 <div class="card-body">
                                     <h4 class="card-title text-capitalize text-muted font-weight-bold">{{ people.nome_profissional.lower }}</h4>
-                                    <p class="card-text text-muted">
-                                        Formado(a) em <strong>{{ people.formacao_academica }} </strong>,
-                                        atua como {{ people.cargo_atual }}
-                                        na {{ people.sua_empresa }}.
-                                        Sua filosofia de vida: {{ people.frase_de_ordem }} .
-                                    </p>
-                                    <a href="{% url 'url_oneconnectpeople' people.id %}" class="btn btn-primary stretched-link mt-3">Read More...</a>
+                                    <p class="card-text text-muted">Formado/a em <strong>{{ people.formacao_academica }} </strong>, atua como {{ people.cargo_atual }} na {{ people.sua_empresa }}. Sua filosofia de vida: {{ people.frase_de_ordem }} .</p>
+                                    <button type="button" data-toggle="modal"  data-target="#detalaisOnePeople" class="btn btn-primary stretched-link mt-3">Read More...</button>
                                 </div>
                             </div>>
                         </li>
@@ -122,6 +115,89 @@
 
             </section>
         </div>
+
+         <!-- Update Task Modal-->
+        <div class="modal shadow-lg mt-0 pt-0 fade rounded" id="detalaisOnePeople">
+            <div class="modal-dialog modal-lg modal-dialog-centered modal-dialog-scrollable rounded">
+                <div class="modal-content">
+
+                <!-- Modal Header -->
+                <div class="modal-header detals_cp">
+                    <h4 class="modal-title text-dark font-weight-bolder">Apresentação completa do Connect</h4>
+                    <button type="button" class="close d-none" data-dismiss="modal" disabled>&times;</button>
+                </div>
+
+                <!-- Modal body -->
+                <div class="modal-body text-muted">
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-6 col-lg-6 col-xl-6 mx-auto mb-5">
+                            <figure class="rounded mx-auto">
+                                <img class="row col-12 mx-auto mx-sm-auto mx-md-auto"
+                                    src="../../media/{{thepeople.imagem_perfil}}"
+                                    class="rounded"
+                                    style="max-width:350px;">
+                            </figure>
+
+                            <div class='col-12 col-sm-12 mx-auto'>
+                                <ul class="nav justify-content-center">
+                                    <li class="nav-item">
+                                        <a class="nav-link social_business"
+                                            href="#"
+                                            title="Fale comigo diretamente">
+                                            <img src="../../../media/images/whatsApp.jpeg"
+                                               class="m-0 p-0 social_business">
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link social_business"
+                                            href="#"
+                                            title="Visite o nosso FACEBOOK">
+                                            <img src="../../../media/images/facebook-2.png"
+                                                class="m-0 p-0 social_business">
+                                        </a>
+                                    </li>
+                                    <li class="nav-item">
+                                        <a class="nav-link social_business"
+                                            href="#"
+                                            title="Visite o nosso LINKEDIN">
+                                            <img src="../../../media/images/ig-logo-email.png"
+                                                class="m-0 p-0 social_business">
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="mx-auto text-muted">
+                            <h2 class="text-capitalize font-weight-bold display-7 mb-4">{{ thepeople.nome_profissional.lower }}</h2>
+                            <p class="text-capitalize ">Filosofia de vida: &nbsp;<strong>{{ thepeople.frase_de_ordem.lower }}</strong></p>
+                            <p class="text-capitalize">Empresa: &nbsp;<strong>{{ thepeople.sua_empresa }}</strong></p>
+                            <p class="text-capitalize ">Cargo: &nbsp;<strong>{{ thepeople.cargo_atual }}</strong></p>
+
+                            <p class="text-capitalize">áreas de interesse: &nbsp;<strong>{{ thepeople.areas_de_interesse.lower }}</strong></p>
+                            <p class="text-capitalize">projetos: &nbsp;<strong>{{ thepeople.projetos }}</strong></p>
+                            <p class="text-capitalize">País de residência: &nbsp;<strong>{{ thepeople.pais_de_residencia.lower }}</strong></p>
+                            <p class="text-capitalize">País de nacionalidade: &nbsp;<strong>{{ thepeople.pais_de_nacionalidade.lower }}</strong></p>
+                            <p class="text-capitalize">linguas: &nbsp;<strong>{{ thepeople.linguas }}</strong></p>
+
+                            <p class="text-capitalize">Site de Empresa: &nbsp;<a href="{{ thepeople.site_da_sua_empresa }}" target="{{ open_tab }}"><span class="badge badge-info">Visitar o site</span></a></p>
+                            <br><br>
+                        </div>
+                    </div>
+                    <br>
+
+                </div>
+
+                <!-- Modal footer -->
+                <div class="modal-footer detals_cp">
+                    <a href="{% url 'url_allpeople' %}" class="w-25"><button type="button" title="Fechar modal" class="btn btn-dark w-100 font-weight-bold">Sair</button></a>
+                    <button type="button" class="btn btn-success d-none" title="Fechar modal"  data-dismiss="modal"></button>
+                </div>
+
+                </div>
+            </div>
+        </div>
+
 
 
         <div class="box hide">
@@ -231,6 +307,13 @@
                 </p>
             </footer>
         </section>
+
+        <script>
+            $(document).ready(function () {
+                $('#detalaisOnePeople').modal('show');
+            });
+        </script>
+
     </div>
 
 </body>
