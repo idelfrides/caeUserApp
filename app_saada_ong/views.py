@@ -397,7 +397,7 @@ def listAllNews(request):
 def listAllConnectPeople(request):
     """ Retrive all connect people """
 
-    people_data = {'title': 'Connect People'}
+    people_data = {'title': 'Connect People | CAE'}
     people_data['allpeople'] = ConnectPeople.objects.filter(ativo=True)
     # people_data['projects'] = Projetos.objects.filter(ativo=True)
 
