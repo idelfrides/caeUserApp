@@ -29,8 +29,8 @@ import hashlib
 
 # TODO: SHOW SIGNAL  ALERT
 # TODO: RESOLVER O TROUBLE RE CLICAR FORA DO MODAL (MANTÉM O PEOPLE ANTERIOR)
-# TODO: RESOLVER TEXTO DESPROPORCIONAL NO ONE BUSINESS
-# TODO: 
+# TODO: RESOLVER TEXTO DESPROPORCIONAL NO ONE BUSINESS --> CSS
+# TODO:
 
 
 '''
@@ -53,8 +53,6 @@ def home(request):
     )
 
 
-# CAEorang-removebg-previewPng.png
-# @app.route('/login', methods=['GET', 'POST'])
 # not used
 def cae_login(request):
 
@@ -199,7 +197,6 @@ def cae_register(request):
                 'app_saada_ong/pre-register-cae.html',
                 userdata
             )
-
 
         new_user = User.objects.create_user(
             username=custom_username,
