@@ -146,10 +146,6 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
-
-
-
-
 # ------------- SETTING EMIAL INFO -----------------
 #
 # True
