@@ -1,0 +1,1 @@
+web: gunicorn neilytaTec1.wsgi --log-file -
