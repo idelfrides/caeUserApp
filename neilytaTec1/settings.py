@@ -27,7 +27,7 @@ SECRET_KEY = config('SECRET_KEY')
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config('DEBUG', default=False, cast=bool)
 
-ALLOWED_HOSTS = ['connectafricaeducation.herokuapp.com', 'localhost:8000']
+ALLOWED_HOSTS = ['connectafricaeducation.herokuapp.com', 'http://127.0.0.1:8000']
 
 
 # Application definition
@@ -135,7 +135,7 @@ USE_TZ = True
 STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
-
+# staticfiles
 STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
