@@ -1,6 +1,6 @@
 # My ignored files/folders go here
 
-# .gitignore
+.gitignore
 .vscode/
 .idea/
 test.sql
@@ -10,8 +10,11 @@ pagecapvenv/
 helper_folder/
 helper_ignored/
 doc.text
-
-# -----------------------------------
+CAE_ENV/
+ENV_CAE/
+*.pyc
+migrations/
+# --------------------------------------
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
@@ -69,7 +72,7 @@ coverage.xml
 # Django stuff:
 *.log
 local_settings.py
-db.sqlite3
+*.sqlite3
 
 # Flask stuff:
 instance/

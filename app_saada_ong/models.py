@@ -1,6 +1,12 @@
 from django.db import models
+from django.contrib.auth.models import User
 
+'''
+GENDER_CHOICE = [
+    ('O Q FICA NO SISTEMA', 'O Q É APRESENTADO NO ADMIN DJANGO'),
+]
 
+'''
 GENDER_CHOICE = [
     ('MASCULINO', 'Masculino'),
     ('FEMININO', 'Feminino'),
@@ -21,10 +27,244 @@ COURSES_CHOICE = [
 ]
 
 
+COUNTRY_CHOICE = [
+    ('BRASIL', 'Brasil'),
+    ('PORTUGAL', 'Portugal'),
+    ('ESPANHA', 'Espanha'),
+    ('FRANÇA', 'França'),
+    ('CANADA', 'Canada'),
+    ('HOLANDA', 'Holanda'),
+    ('ALEMANHA', 'Alemanha'),
+    ('USA', 'USA'),
+    ('INGLATERRA', 'Inglaterra'),
+    ('SUIÇA', 'Suiça'),
+    ('BELGICA', 'Belgica'),
+    ('IRLANDA DO NORTE', 'Irlanda do Norte'),
+    ('AUSTRÁLIA', 'Austrália'),
+    ('ARGENTINA', 'Argentina'),
+    ('MÉXICO', 'México'),
+    ('OUTRO', 'Outro [informar]'),
+]
+
+BR_STATES_CHOICE = [
+    ('SÃO PAULO', 'São Paulo'),
+    ('RIO DE JANEIRO', 'Rio de Janeiro'),
+    ('MINAS GERAIS', 'Minas Gerais'),
+    ('ESPÍRITO SANTO', 'Espírito Santo'),
+    ('CEARÁ', 'Ceará'),
+    ('BAHIA', 'Bahia'),
+    ('SANTA CATARINA', 'Santa Catarina'),
+    ('RIO GRANDE DO SUL', 'Rio Grande do Sul '),
+    ('RIO GRANDE OD NORTE', 'Rio Grande do Norte'),
+    ('ESPÍRITO SANTO', 'Paraná'),
+    ('Mato Grosso', 'Mato Grosso'),
+    ('OUTRO', 'OUTRO'),
+]
+
+
+STATES_CHOICE = [
+    ('TÉCNICO EM INFORMÁTICA', 'TÉCNICO EM INFORMÁTICA'),
+    ('TÉCNICO EM AGROPECUÁRIA', 'TÉCNICO EM EM AGROPECUÁRIA'),
+    ('TÉCNICO EM ELETROMECÂNICA', 'TÉCNICO EM ELETROMECÂNICA'),
+    ('TÉCNICO EM FINANÇAS', 'TÉCNICO EM FINANÇAS'),
+]
+
+
+
 
 ''' -----------------------------------------------------------------
                             SAADA ONG
 ---------------------------------------------------------------------
+'''
+
+
+class ConnectPeople(models.Model):
+    ''' connect people table/model '''
+
+    # ONE-TO-ONE RELATIONSHIP
+    usuario = models.OneToOneField(
+        User,
+        on_delete=models.PROTECT
+    )
+
+    # default=7
+    nome_profissional = models.CharField(
+        max_length=255
+    )
+
+    imagem_perfil = models.ImageField(upload_to='images/connectPeople/')
+
+    frase_de_ordem = models.CharField(
+        max_length=255,
+        blank=True,
+        default='Sua frase de guerra aqui'
+    )
+
+    cargo_atual = models.CharField(
+        max_length=100
+    )
+
+    sua_empresa = models.CharField(
+        max_length=200,
+        blank=True,
+        default='O nome da sua empresa *')
+
+    site_da_sua_empresa = models.URLField(
+        blank=True)
+
+    pais_de_residencia = models.CharField(
+        max_length=50,
+        choices=COUNTRY_CHOICE
+    )
+    celular = models.CharField(
+        blank=True,
+        max_length=15,
+        default='005588999965504'
+    )
+
+    br_estado = models.CharField(
+        max_length=50,
+        choices=BR_STATES_CHOICE
+    )
+
+    estado = models.CharField(
+        max_length=25,
+        default='O seu Estado/Província',
+        help_text="<p>Se você marcou <strong>OUTRO</strong> no campo acima, digite aqui o seu Estado/Província !</p>",
+        blank=True
+    )
+
+    pais_de_nacionalidade = models.CharField(
+        max_length=70
+    )
+
+    data_do_nascimento = models.DateField()
+
+    genero = models.CharField(max_length=9, choices=GENDER_CHOICE)
+
+    formacao_academica = models.CharField(
+        max_length=100
+    )
+
+    ocupacao = models.CharField(
+        max_length=100,
+        blank=True,
+        default='Sua ocupação atual'
+    )
+
+    linguas = models.CharField(
+        max_length=255
+    )
+
+    areas_de_interesse = models.TextField(
+        blank=True,
+        default='Seus interesses'
+    )
+
+    projetos = models.TextField(
+        blank=True,
+        default='Seus projetos...'
+    )
+
+    ativo = models.BooleanField(
+        default=True,
+        help_text="<p>Se você não quiser aparecer no site, DESMARQUE este campo!</p>"
+    )
+
+    peolple_atualizado = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False
+    )
+
+    data_hora_criação = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True
+    )
+
+
+    def __str__(self):
+        return  self.nome_profissional
+
+    class Meta:
+        verbose_name_plural='Cadastro do Connect People'
+
+
+
+class ConnectBusiness(models.Model):
+    ''' Business model '''
+
+    nome_projeto = models.CharField(max_length=225)
+
+    # MANY-TO-ONE RELATIONSHIP
+    dono_projeto = models.ForeignKey(
+        ConnectPeople,
+        on_delete = models.PROTECT
+    )
+
+    logotipo_projeto = models.ImageField(upload_to='images/connectBusiness/')
+
+    slogan_projeto= models.CharField(max_length=255,
+                                    blank=True,
+                                    default='Slogan do projeto')
+
+
+    descricao_resumida = models.TextField(
+        max_length=180,
+        help_text="<p><strong>AVISO: </strong> Esta é a descrição que irá aparecer na visualização de todos os business. 180 caractéres no máximo!</p>"
+    )
+
+    descricao = models.TextField(help_text="<p>Descreve aqui quais valores o seu business gera a outros business ou pessoas *</p>")
+
+    link_do_site = models.URLField()
+
+    link_linkedin = models.URLField(blank=True)
+
+    link_facebook = models.URLField(blank=True)
+
+    link_instagram = models.URLField(blank=True)
+
+    ativo = models. BooleanField(
+        default=True,
+        help_text="<p>Se você não quiser que este projeto de Business seja visualizado no site, DESMARQUE este campo!</p>")
+
+
+    atualizar = models.DateTimeField(
+        auto_now=True,
+        auto_now_add=False
+    )
+
+    data_hora_criação = models.DateTimeField(
+        auto_now=False,
+        auto_now_add=True
+    )
+
+    def __str__(self):
+        return  self.nome_projeto
+
+    class Meta:
+        verbose_name_plural='Registro de Projetos de Business'
+
+
+
+
+'''
+
+class HashHolder(db.Model):
+    """ Task model """
+
+    __tablename__ = 'hash_register'
+
+    id = db.Column(db.Integer, primary_key=True)
+    _hash = db.Column(db.String)
+    username = db.Column(db.String)
+
+    def __init__(self, _hash, username):
+        self._hash = _hash
+        self.username = username
+
+    def __repr__(self):
+        return '<Owner %r>' % self.username
+
 '''
 
 
@@ -135,7 +375,6 @@ class Noticias(models.Model):
 
     class Meta:
         verbose_name_plural='Noticias'
-
 
 
 

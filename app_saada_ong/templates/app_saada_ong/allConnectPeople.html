@@ -2,7 +2,7 @@
 <html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Saada ONG | {{ title }}</title>
+    <title>{{ title }}</title>
     <meta name="description" content=" MINICURSO DHANGO 2.2.1 | JUN/2019">
     <meta name="keywords" content="DJANGO, PYTHON, HTML,CSS">
     <meta name="author" content="IDELFRIDES JORGE">
@@ -43,47 +43,41 @@
             </div>
 
             <!-- NAV BAR-->
-            <div class="w-100 mx-auto my-4 vav-fixed">
+            <div class="w-100 mx-auto my-4">
                 <ul class="nav nav-tabs text-uppercase justify-content-center w-100">
                     <li class="nav-item  my-4 mx-2 teste-estilo">
                         <a class="nav-link text-white"  href="{% url 'url_home' %}" title="Home">
-                            saada
+                            connect africa
                         </a>
-                    </li>
-
-                    <li class="dropdown nav-item bg-none my-4 mx-2 teste-estilo">
-                        <p class="nav-link text-white  dropdown-toggle" data-toggle="dropdown">
-                            projetos
-                        </p>
-
-                        <div class="dropdown-menu text-capitalize">
-                            {% for p in projects %}
-                                <a class="dropdown-item text-capitalize" href="{% url 'go2thisproject' p.id %}">{{ p.nome_projeto }}</a>
-                            {% endfor %}
-                        </div>
-
                     </li>
 
                     <li class="nav-item my-4 mx-2 teste-estilo">
-                        <a class="nav-link text-white active_menu" href="#" title="Realizadores do Evento">
-                            notícias
+                        <a class="nav-link text-white active_menu" href="{% url 'url_allpeople' %}" title="Todos os Connect People">
+                            connect people
                         </a>
                     </li>
+
+                    <li class="nav-item my-4 mx-2 teste-estilo">
+                        <a class="nav-link text-white" href="{% url 'url_allbusiness' %}" title="Todos os Connect People">
+                            connect business
+                        </a>
+                    </li>
+
 
                     <li class="nav-item my-4 mx-2 teste-estilo">
                         <a class="nav-link text-white"  href="#" title="Cursos Técnicos">
-                            quem somos
+                            login django
                         </a>
                     </li>
 
                     <li class="nav-item my-4 mx-2 teste-estilo">
                         <a class="nav-link text-white" href="#" title="Alunos de alto performance">
-                            apoie este projeto
+                            blog
                         </a>
                     </li>
 
                     <li class="nav-item  my-4 mx-2 teste-estilo">
-                        <a class="nav-link text-white" href="{% url 'url_listagem' %}" title="Listagem de todas cateorias">
+                        <a class="nav-link text-white" href="#" title="Listagem de todas cateorias">
                             curiosidades
                         </a>
                     </li>
@@ -93,27 +87,34 @@
 
 
         <!-- ************ ALL NEWS HERE ************** -->
-        <div class="container-fluid w-100 py-0 mx-0 news_saada_background">
-            <section id="evento" class="container-fluid border border-dark w-100 pb-5 pt-1 news_bg">
+        <div class="container-fluid w-100 py-0 px-0 mx-0 news_saada_background">
+            <section id="evento" class="container-fluid border border-dark w-100 pb-5 mx-0 pt-1 news_bg">
                 <header class="my-5" >
                     <h1 class="col-12 col-sm-12 text-white font-weight-bold text-uppercase text-center" style="font-size: 2em;">
-                        Acompanhe todas as notícias da Saada ONG
+                        Veja aqui os connect people que pode ser seu parceiro/a de business
                         <div class="mt-3 py-1 mx-auto" style="background-color:orange; width: 20%;"></div>
                     </h1>
                 </header> <br><br><br>
 
-                <div class="container-fluid pb-5 mb-5 mx-auto">
-                    {% for the_news in allnews %}
-                    <ul class="d-inline-block mx-auto">
+                <div class="mb-5 w-100">
+                    {% for people in allpeople %}
+                    <ul class="d-inline-block col-sm-12 col-md-4 col-lg-4 col-xl-2 mx-sm-1 mx-md-2 mx-lg-2 mx-xl-5 ml-xl-5">
                         <li class="row col w-10 d-inline-block mx-auto">
-                            <div class="card border-dark mx-auto news_stype" style="max-width:320px; width:320px;">
-                                <img class="card-img-top" src="../../../media/{{the_news.image_notícia}}" alt="News image" style="max-width:320px;">
+                            <div class="card border-dark  mx-auto news_stype" style="max-width:320px; width:320px;">
+                                <img class="card-img-top"
+                                    src="../../../media/{{people.imagem_perfil}}"
+                                    alt="Connect people image" style="max-width:320px;">
                                 <div class="card-body">
-                                    <h4 class="card-title text-capitalize text-muted border">{{ the_news.título_notícia }}</h4>
-                                    <textarea class="form-control border-0" resize="none" rows="3" >{{ the_news.noticia }}</textarea>
-                                    <a href="{% url 'go2showonenews' the_news.id %}" class="btn btn-primary stretched-link mt-3">Read More...</a>
+                                    <h4 class="card-title text-capitalize text-muted font-weight-bold">{{ people.nome_profissional.lower }}</h4>
+                                    <p class="card-text text-muted">
+                                        Formado(a) em <strong>{{ people.formacao_academica }} </strong>,
+                                        atua como {{ people.cargo_atual }}
+                                        na {{ people.sua_empresa }}.
+                                        Sua filosofia de vida: {{ people.frase_de_ordem }} .
+                                    </p>
+                                    <a href="{% url 'url_oneconnectpeople' people.id %}" class="btn btn-primary stretched-link mt-3">Read More...</a>
                                 </div>
-                            </div>
+                            </div>>
                         </li>
                     </ul>
                     {% endfor %}

@@ -3,8 +3,8 @@
                         SCROLL STYPE
 --------------------------------------------------------------*/
 .active_menu{
-    background-color: rgba(0, 0, 225, 0.4);
-    color:  red;
+    background-color: rgba(239, 156, 129, 1);
+    font-weight: bolder;
 }
 
 span{
@@ -43,11 +43,23 @@ span{
     margin: auto;
 }
 
+.test_bg{
+    background-color: rgba(239, 186, 129, 1);
+}
+
+.detals_cp{
+    background-color: rgba(255, 187, 129, 1);
+}
+
 /*  ---------------------  NOT USED ABOVE  ----------------------------- */
 
+/*
 .teste-estilo:hover{
     border-bottom: 1px solid orange;
+    margin-bottom: 10px;
 }
+*/
+
 
 .saada_carousel_control{
     height: 100%;
@@ -71,14 +83,31 @@ span{
 }
 
 .news_saada_background{
-    background-image: url('../../media/images/buildings-5070537_1920.jpg');
+    background-image: url('../../media/images/workerplace-black.jpg');
+    background-repeat: repeat;
+    background-position: center top;
+    background-attachment: fixed;
+}
+
+
+.connect_business_background{
+    background-image: url('../../media/images/Black-people-workplace.jpg');
     background-repeat: no-repeat;
     background-position: 0%;
     background-attachment: fixed;
 }
 
+
+.one_connect_business_bg{
+    background-image: url('../../media/images/Teamwork-at-its-best.jpg');
+    background-repeat: repeat;
+    background-position: 0%;
+    background-attachment: fixed;
+}
+
+
 .project_bg{
-    background-color: rgba(120, 120, 120, 0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 
 
@@ -95,10 +124,10 @@ span{
 
 
 .news_stype:hover{
-    box-shadow: 0px 13px 13px 0   rgba(255, 255, 255, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-    padding-right: 10px;
-    margin-top: 10px;
-    width: 340px;
+    box-shadow: 0px 13px 13px 0  rgba(255, 255, 255, 0.5), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    padding-right: 5px;
+    margin-top: 5px;
+    border: 1px solid rgba(239, 186, 129, 1);
 }
 /* -------------------------------------------------------
                         FOOTER STYLE
@@ -131,10 +160,30 @@ span{
     width: 40px;
     height: 40px;
 }
+
+.social_business{
+    opacity: 1;
+    width: 35px;
+    height: 35px;
+    margin-right: 35px;
+}
+
+.social_business:hover{
+    opacity: 1;
+    width: 37px;
+    height: 37px;
+}
+
+
 .bg-dark2 {
     background-color: #000;
 }
 
+
+
+.teste_bg{
+    border: 1px solid transparent;
+}
 /* --------------------------------------------------------
                 SCROLL TOP - not mine:  USED
 -----------------------------------------------------------*/
@@ -151,8 +200,8 @@ span{
     margin: 0 3em 3em 0;
     border-radius: 50%;
     padding: .25em;
-    width: 80px;
-    height: 80px;
+    width: 50px;
+    height: 50px;
     background-color: #F8F8F8;
 }
 

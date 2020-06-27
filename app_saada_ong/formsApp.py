@@ -6,6 +6,19 @@ from django.contrib.auth.models import User
 
 
 
+class UserForm(ModelForm):
+    class Meta:
+        model = User
+        fields = [
+            'username',
+            'password',
+            'email',
+            'first_name',
+            'last_name',
+            'groups',
+        ]
+
+
 # ***************************************************
 
 class ProfForm(ModelForm):
@@ -48,6 +61,7 @@ class CursoForm(ModelForm):
         ]
 
 
+'''
 class LoginForm(ModelForm):
     class Meta:
         model = User
@@ -55,3 +69,4 @@ class LoginForm(ModelForm):
             'username',
             'password',
         ]
+'''

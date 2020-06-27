@@ -8,6 +8,9 @@ from .models import CarouselImages
 from .models import Noticias
 from .models import Projetos
 from .models import QuemSomos
+from .models import ConnectPeople
+from .models import ConnectBusiness
+
 
 
 
@@ -84,11 +87,17 @@ admin.site.register(
     QuemSomosModelAdmin
 )
 
+admin.site.register(
+    ConnectPeople
+)
 
+admin.site.register(
+    ConnectBusiness
+)
 
 '''
 admin.site.register(Professores)
-admin.site.register(Alunos)
+admin.site.register(Alunos
 admin.site.register(Cursos)
 admin.site.register(Evento)
 

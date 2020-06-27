@@ -22,13 +22,13 @@ class LibRegister(object):
         string2hash = data_to_send_email['username'] + data_to_send_email['email']
         string2hash += data_to_send_email['last_name']
 
-        check_key = hashlib.sha224(string2hash).hexdigest()
+        check_key = hashlib.sha224(string2hash.encode()).hexdigest()
         check_key = str(check_key)  # TODO: find the best way to do this
 
         print(check_key)
 
         endpoint = 'login2complete_register'
-        link2finish_register = 'https://connectafricaeducation.com/{endpoint}?key={check_key}'.format(endpoint, check_key)
+        link2finish_register = "https://connectafricaeducation.com/{endpoint}?key={check_key}".format(endpoint, check_key)
 
         content_msg = '''
 
@@ -39,7 +39,7 @@ class LibRegister(object):
             sua vida.
 
             Confira os seus dados de acesso e clique no link indicado abaixo
-            para completar o seu cadastro.
+            para completar o cadastro.
 
 
             INFORMAÇÕES DE ACESSO:
@@ -51,12 +51,12 @@ class LibRegister(object):
             Complete o seu cadastro <a href="{link}" target="_blank"><buttom>Neste link</buttom></a>
 
             Muito obrigado...
-            A gente lhe espera doutro lado.
+            A gente espera você doutro lado.
             Grande abraço!
 
             ------------------------------
             Equipe CONNECT AFRICA EDUCATION
-            <Unindo cérebros pra gerar riqueza>
+            <Unindo cérebros para gerar riqueza>
 
 
             PS.: Os dados de acesso informados NÃO irão funcionar se não acessar pelo link acima.
@@ -71,7 +71,11 @@ class LibRegister(object):
         subject_help = data_to_send_email['tratamento'] + ' ' + data_to_send_email['first_name']
         pronoun_first_name = subject_help.strip()
         subject = 'Prezado(a) \n' + pronoun_first_name + ' ' + data_to_send_email['last_name']
-        name_to_view = 'Prezado(a) \n' + pronoun_first_name + ' ' + data_to_send_email['last_name']
+        name_to_view =  pronoun_first_name + '  ' + data_to_send_email['last_name']
+
+
+        print(content_msg)
+
         '''
         user_message = Message(
             recipients=data_to_send_email['email'],
@@ -102,10 +106,11 @@ class LibRegister(object):
 
         """)
 
+        # TODO: USE RENDER STEAD REDIRECT . otherwise ok
+        # TODO: CREATE ENDPOINT register_instructions
 
-        #TODO: USE RENDER STEAD REDIRECT . otherwise ok
-
-        return redirect('register_instructions')
+        # return redirect('register_instructions')
+        return name_to_view
 
         '''
         new_user_data = {'name': name_to_view}
