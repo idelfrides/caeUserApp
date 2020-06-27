@@ -4,7 +4,7 @@ function go2register() {
 }
 
 function go2login() {
-   window.location.replace("http://127.0.0.1:8000/login");
+   window.location.replace("https://connectafricaeducation.herokuapp.com/login");
 }
 
 function go2logout() {
