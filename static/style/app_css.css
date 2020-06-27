@@ -3,8 +3,8 @@
                         SCROLL STYPE
 --------------------------------------------------------------*/
 .active_menu{
-    background-color: rgba(0, 0, 225, 0.4);
-    color:  red;
+    background-color: rgba(239, 156, 129, 1);
+    font-weight: bolder;
 }
 
 span{
